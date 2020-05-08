@@ -1,0 +1,18 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+<div class='header'>
+<h1>Employees</h1>
+</div>
+
+<div class="list-container">
+<ol>
+{% for department in departments %}
+    <li>
+        <p>{{ department }}</p>
+        
+    </li>
+{% endfor %}
+</ol>
+<div class="list-container">
+{% endblock content %}
