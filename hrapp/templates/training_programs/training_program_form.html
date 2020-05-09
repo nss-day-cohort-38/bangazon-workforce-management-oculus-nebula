@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>HR App</title>
+</head>
+
+<body>
+    <h1>Training Program Form</h1>
+
+    {% if training_program.id is not None %}
+        <form action="{% url 'hrapp:training_program' training_program.id %}" method="post">
+    {% else %}
+        <form action="{% url 'hrapp:training_programs' %}" method="post">
+    {% endif %}
+        {% csrf_token %}
+        <fieldset>
+            <label for="title">Title: </label>
+            <input id="title" type="text" name="title" value="{{ training_program.title }}">
+        </fieldset>
+        <fieldset>
+            <label for="start_date">Start Date: </label>
+            <input id="start_date" type="date" name="start_date" value="{{ training_program.start_date }}">
+        </fieldset>
+        <fieldset>
+            <label for="end_date">End Date: </label>
+            <input id="end_date" type="date" name="end_date" value="{{ training_program.end_date }}">
+        </fieldset>
+        <fieldset>
+            <label for="capacity">Capacity: </label>
+            <input id="capacity" type="text" name="capacity" value="{{ training_program.capacity }}">
+        </fieldset>
+        <fieldset>
+            <label for="employees">Employees: </label>
+            <select id="employees" type="text" name="employees">
+                {% for employee in training_programs %}
+                <option {% if employee.id == training_.location_id %}selected{% endif %} value="{{ library.id }}">
+                    {{ library.title }}</option>
+                {% endfor %}
+            </select>
+        </fieldset>
+
+        {% if book.id is not None %}
+            <input type="hidden" name="actual_method" value="PUT">
+            <input type="submit" value="Update" />
+        {% else %}
+            <input type="submit" value="Create" />
+        {% endif %}
+
+    </form>
+</body>
+
+</html>

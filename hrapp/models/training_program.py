@@ -13,5 +13,8 @@ class TrainingProgram(models.Model):
         "Employee", through='TrainingProgramEmployee')
 
     class Meta:
-        verbose_name = "training program"
-        verbose_name_plural = "training programs"
+        verbose_name = "trainingprogram"
+        verbose_name_plural = "trainingprograms"
+
+    def get_absolute_url(self):
+        return reverse("trainingprogram", kwargs={"pk": self.pk})
