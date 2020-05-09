@@ -10,7 +10,17 @@ def employee_list(request):
             conn.row_factory = sqlite3.Row
             db_cursor = conn.cursor()
 
-            # TODO: Add to query: e.department,
+            '''
+            Joins employee table with department table
+            returns
+            - Employee Id
+            - Employee First Name
+            - Employee Last Name
+            - Employee Start Date
+            - Employee is supervisor
+            - Employee Department
+            '''
+
             db_cursor.execute("""
                 SELECT
                     e.id,
@@ -34,6 +44,7 @@ def employee_list(request):
                 employee.first_name = row['first_name']
                 employee.last_name = row['last_name']
                 employee.start_date = row['start_date']
+                # Adds entire department class to employee.department
                 employee.department_id = row['department_id']
 
                 all_employees.append(employee)
