@@ -1,0 +1,21 @@
+{% extends 'shared/base.html'%}
+{% load static %}
+
+{% block content %}
+<div class="header"><h1>Computer #{{ computer.id }}</h1></div>
+<div class="list-container">
+    <ul>
+        <li>Make: {{computer.manufacturer}}</li>
+        <li>Model: {{computer.make}}</li>
+        <li>Purchased: {{computer.purchase_date}}</li>
+        {%if computer.first_name == null%}
+        <li> Not assigned to an employee yet.</li>
+        {%else%}
+        <li>Assigned to: {{computer.first_name}} {{computer.last_name}} (assigned: {{computer.assign_date}})</li>
+        {% endif %}
+
+    </ul>
+</div>
+
+
+{% endblock %}
