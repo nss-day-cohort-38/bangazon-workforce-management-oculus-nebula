@@ -17,11 +17,13 @@ urlpatterns = [
     # path('trainingprograms/<int:training_program_id>/details', attendee_list, name='training_program'),
 
     path('employee/<int:employee_id>', employee_details, name='employee'),
+    path('employee/<int:employee_id>/form', employee_edit, name='employee_form'),
+    path('employee/form', employee_add, name='employee_form'),
     path('computers/', computer_list, name="computers"),
     path('computer/<int:computer_id>/', computer_details, name="computer"),
 
     path('departments/', department_list, name="departments"),
     path('computer/<int:computer_id>/', computer_details, name="computer"),
-    path('computer/form/', computer_form, name='computer_form')
-
+    path('computer/form/', computer_form, name='computer_form'),
+    path('computer/delete/<int:computer_id>/', confirm_computer_delete, name='confirm_computer_delete'),
 ]
