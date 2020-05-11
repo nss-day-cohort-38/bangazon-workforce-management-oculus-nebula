@@ -12,3 +12,5 @@ from .training_programs.training_programs_list import list_count
 
 from .computers import computer_list
 from .computers import computer_list, computer_details
+from .departments import department_list
+from .computers import computer_list, computer_details, computer_form

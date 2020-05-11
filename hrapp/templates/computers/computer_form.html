@@ -1,0 +1,37 @@
+{% extends 'shared/base.html'%}
+{% load static %}
+{%block content %}
+<div class="header"><h1>New Computer Form</h1></div>
+<div class="computer-form">
+<form action = "{% url 'hrapp:computers' %}" method="POST">
+      {% csrf_token %}
+<fieldset ='comp-set'>
+<label for='manufacturer'>Manufacturer: </label>
+<input type='text' id="manufacturer" name="manufacturer">
+</fieldset>
+<fieldset ='comp-set'><label for='make'>Make: </label>
+<input type='text' id="make" name="make"></fieldset>
+<fieldset ='comp-set'>
+    <label for="purchase_date">Purchase Date: </label>
+    <input type="date" id="purchase_date" name="purchase_date">
+</fieldset>
+<fieldset ='comp-set'>
+<label for='employee'>Employee</label>
+<select>
+{% for employee in employees %}
+{%if employee.is_supervisor%}
+<option value="{{employe.id}}">*<strong>{{employee}}</strong> {{employe.id}} </option>
+{%else%}
+<option value = "{{employe.id}}">{{employee}} {{employe.id}}</option>
+{%endif%}
+{% endfor %}
+</select>
+
+</fieldset>
+<fieldset>
+<input type="submit" value="Add Computer"/>
+</fieldset>
+</form>
+</div>
+
+{% endblock %}
