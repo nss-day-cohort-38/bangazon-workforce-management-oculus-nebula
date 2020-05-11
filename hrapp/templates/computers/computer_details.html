@@ -15,8 +15,13 @@
         {% endif %}
 
     </ul>
-    <a data-toggle="modal" href="#confirmDelete">Delete</a>
-    {% include 'confirmDelete.html' %}
+    {%if computer.first_name == null%}
+    <a href="{% url 'hrapp:confirm_computer_delete' computer.id%}">Delete</a>
+
+    {%else%}
+    <a href="{% url 'hrapp:computers'%}">Go Back</a>
+    {%endif%}
+
 </div>
 
 
