@@ -24,8 +24,8 @@ def get_computer(computer_id):
                 e.first_name,
                 e.last_name
                 from hrapp_computer c
-                join hrapp_employeecomputer ec on ec.computer_id = c.id
-                join hrapp_employee e on ec.employee_id = e.id
+                left join hrapp_employeecomputer ec on ec.computer_id = c.id
+                left join hrapp_employee e on ec.employee_id = e.id
                 where c.id = ?
         """, (computer_id,))
         #return the results from the fetch call
