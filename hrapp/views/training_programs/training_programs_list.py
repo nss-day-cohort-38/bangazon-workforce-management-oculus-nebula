@@ -43,24 +43,3 @@ def training_programs_list(request):
                 (form_data['title'], form_data['start_date'],
                     form_data['end_date'], form_data['capacity']))
         return redirect(reverse('hrapp:trainingprograms'))
-
-
-def get_count(training_program_id):
-    with sqlite3.connect(Connection.db_path) as conn:
-        db_cursor = conn.cursor()
-        db_cursor.execute("""
-                SELECT COUNT(training_program_id)
-                FROM hrapp_trainingprogramemployee
-                WHERE training_program_id = ?
-            """, (training_program_id,))
-        return db_cursor.fetchone()
-
-
-def list_count(request, training_program_id):
-    if request.method == 'GET':
-        get_count = get_count(training_program_id)
-        template = 'training_programs/training_program_list.html'
-        context = {
-            "list_count": get_count
-        }
-        return render(request, template, context)

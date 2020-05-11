@@ -12,6 +12,7 @@
 
     {% if training_program.id is not None %}
         <form action="{% url 'hrapp:training_program' training_program.id %}" method="post">
+        {% csrf_token %}
     {% else %}
         <form action="{% url 'hrapp:trainingprograms' %}" method="post">
         {% csrf_token %}
