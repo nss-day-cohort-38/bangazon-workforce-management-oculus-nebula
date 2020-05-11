@@ -14,9 +14,7 @@ def department_list(request):
             select
                 d.id,
                 d.department_name,
-                d.budget,
-                e.start_date,
-                e.is_supervisor
+                d.budget
             from hrapp_department d
             """)
 
@@ -24,9 +22,9 @@ def department_list(request):
 
 
 
-    template = 'employees/employees_list.html'
+    template = 'departments/departments_list.html'
     context = {
-        'employees': all_employees
+        'departments': all_departments
     }
 
     return render(request, template, context)
