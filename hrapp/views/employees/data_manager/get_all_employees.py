@@ -1,9 +1,10 @@
 import sqlite3
 from ...connection import Connection
+from hrapp.models import model_factory, Employee
 
 def get_all_employees():
     with sqlite3.connect(Connection.db_path) as conn:
-            conn.row_factory = sqlite3.Row
+            conn.row_factory = model_factory(Employee)
             db_cursor = conn.cursor()
 
             '''

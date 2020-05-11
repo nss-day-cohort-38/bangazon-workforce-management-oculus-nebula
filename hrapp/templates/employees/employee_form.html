@@ -2,26 +2,45 @@
 
 {% block content %}
     <h1>Add Employee </h1>
-    <form>
+    {% if employee.id is not None %}
+    {% else %}
+    <form action="{% url 'hrapp:employee_list'%}" method="POST">
+    {% endif %}
+        {% csrf_token %}
         {% comment %} rst name {% endcomment %}
         <fieldset>
-            <label >First Name</label>
+            <label>First Name</label>
             <input type="text" name="first_name" value="{{employee.first_name}}"/>
         </fieldset>
         {% comment %} Last name {% endcomment %}
         <fieldset>
-            <label >Last Name</label>
+            <label>Last Name</label>
             <input type="text" name="last_name" value="{{ employee.last_name }}"/>
         </fieldset>
         {% comment %} Employment start date {% endcomment %}
         <fieldset>
-            <label >Start Date</label>
-        <input type="text" name="start_date" value="{{ employee.start_date }}"/>
+            <label>Start Date</label>
+            <input type="date" name="start_date" value="{{ employee.start_date }}"/>
         </fieldset>
         {% comment %} Select a department from a drop down {% endcomment %}
         <fieldset>
             <label >Department</label>
-            <input type="text" name="department" value="{{ employee.department }}"/>
+
+            <select id="departments" name="department">
+                {% for department in departments %}
+                    <option value="{{department.id}}">{{ department}}</option>
+                {% endfor %}
+            </select>
+
         </fieldset>
+            <input type="hidden" name="is_supervisor" value="False">
+
+        {% if employee.id %}
+            <input type="hidden" name="actual_method" value="PUT">
+            <input type="submit" value="Edit Employee"/>
+        {% else %}
+            <input type="submit" value="Add Employee"/>
+        {% endif %}
+
     </form>
 {% endblock content %}
