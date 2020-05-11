@@ -1,9 +1,9 @@
 import sqlite3
 from ...connection import Connection
-from hrapp.models import model_factory, EmployeeComputer
-def get_employee_computers(employee_id):
+from hrapp.models import model_factory, TrainingProgramEmployee
+def get_employee_training(employee_id):
     with sqlite3.connect(Connection.db_path) as conn:
-        conn.row_factory = model_factory(EmployeeComputer)
+        conn.row_factory = model_factory(TrainingProgramEmployee)
 
         db_cursor = conn.cursor()
 
@@ -11,14 +11,13 @@ def get_employee_computers(employee_id):
         SELECT
             *
         FROM
-            hrapp_employeecomputer ec
+            hrapp_trainingprogramemployee te
         WHERE
-            ec.employee_id = ?
-            AND ec.unassign_date IS NULL
+            te.employee_id = ?
         """, (employee_id, ))
 
         dataset = db_cursor.fetchall()
-        
+
         return dataset
 
 

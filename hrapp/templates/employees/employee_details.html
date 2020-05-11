@@ -1,5 +1,23 @@
 {% extends 'shared/base.html' %}
 
 {% block content %}
-    {{ employee_computer }}
+    <h1>{{ employee.first_name }} {{ employee.last_name }}</h1>
+
+    <p>Department: {{ employee.department.department_name}}</p>
+
+    <p>Training Programs: 
+
+    <ul>
+        {% for program in employee_programs %}
+            <li>{{program.title}}</li>
+            {% empty %}
+                No Programs
+        {% endfor %}
+    </ul>
+</p>
+
+    <p>Assigned Computer: {{ employee_computers|join:", " }} {% if not employee_computers %}No Computer{% endif %}</p>
+
+    
+    
 {% endblock content %}

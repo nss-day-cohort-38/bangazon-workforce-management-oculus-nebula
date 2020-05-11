@@ -17,18 +17,13 @@ def get_all_employees():
             - Employee Department
             '''
 
+            # Got rid of join
+
             db_cursor.execute("""
                 SELECT
-                    e.id,
-                    e.first_name,
-                    e.last_name,
-                    e.start_date,
-                    e.is_supervisor,
-                    d.id department_id
+                    *
                 FROM
                     hrapp_employee e
-                JOIN hrapp_department d ON
-                    d.id = e.department_id
             """)
 
             return db_cursor.fetchall()
