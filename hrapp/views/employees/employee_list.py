@@ -4,6 +4,9 @@ from .data_manager.get_all_employees import get_all_employees
 from .data_manager.add_employee import add_employee
 
 def employee_list(request):
+    """
+    This function handles all of the request to the employee list page
+    """
     if request.method == 'GET':
         all_employees = get_all_employees()
 

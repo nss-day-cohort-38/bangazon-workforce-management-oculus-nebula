@@ -3,6 +3,9 @@ from ...connection import Connection
 from hrapp.models import model_factory, Employee
 
 def get_all_employees():
+    """
+    This function gets all of the employee data from hrapp_employee
+    """
     with sqlite3.connect(Connection.db_path) as conn:
             conn.row_factory = model_factory(Employee)
             db_cursor = conn.cursor()

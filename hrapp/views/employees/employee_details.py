@@ -4,6 +4,9 @@ from .data_manager.get_employee import get_employee
 from django.shortcuts import render
 
 def employee_details(request, employee_id):
+    """
+    This function handles all of the request to the employee's detail page
+    """
     if request.method == "GET":
         employee = get_employee(employee_id)
         employee_computers = [i.computer for i in get_employee_computers(employee_id)]
