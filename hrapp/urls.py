@@ -15,5 +15,5 @@ urlpatterns = [
     path('trainingprograms/<int:training_program_id>/details', training_program_details, name='training_program'),
     # path('trainingprograms/<int:training_program_id>/details', attendee_list, name='training_program'),
 
-
+    path('computers/', computer_list, name="computers"),
 ]
