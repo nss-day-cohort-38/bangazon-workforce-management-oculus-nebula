@@ -13,9 +13,9 @@
     {% if training_program.id is not None %}
         <form action="{% url 'hrapp:training_program' training_program.id %}" method="post">
     {% else %}
-        <form action="{% url 'hrapp:training_program_form' %}" method="post">
-    {% endif %}
+        <form action="{% url 'hrapp:trainingprograms' %}" method="post">
         {% csrf_token %}
+    {% endif %}
         <fieldset>
             <label for="title">Title: </label>
             <input id="title" type="text" name="title" value="{{ training_program.title }}">

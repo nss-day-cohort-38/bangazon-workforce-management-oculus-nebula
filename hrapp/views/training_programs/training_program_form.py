@@ -63,7 +63,7 @@ def training_program_form(request):
         training_programs = get_training_programs()
         template = "training_programs/training_program_form.html"
         context = {
-            "training_programs": training_programs
+            "training_program": training_programs
         }
         return render(request, template, context)
 

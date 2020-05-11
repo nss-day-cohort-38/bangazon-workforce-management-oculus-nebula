@@ -37,9 +37,7 @@ def training_programs_list(request):
 
             db_cursor.execute("""
             INSERT INTO hrapp_trainingprogram
-            (
-                title, start_date, end_date,
-                capacity
+            (title, start_date, end_date, capacity
             )
             VALUES (?, ?, ?, ?)
             """,
