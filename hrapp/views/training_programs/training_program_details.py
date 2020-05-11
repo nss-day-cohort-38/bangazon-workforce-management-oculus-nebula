@@ -63,7 +63,6 @@ def get_training_program(training_program_id):
         return db_cursor.fetchone()
 
 
-
 def attendee_list(request, training_program_id):
     with sqlite3.connect(Connection.db_path) as conn:
         conn.row_factory = model_factory(TrainingProgram)
@@ -102,10 +101,6 @@ def attendee_list(request, training_program_id):
             'all_attendees': all_attendees
         }
         return render(request, template, context)
-
-
-
-
 
 
 

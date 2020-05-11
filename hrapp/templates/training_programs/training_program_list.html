@@ -2,37 +2,43 @@
 {% load static %}
 
 {% comment %} {% block css %}
-    <link rel="stylesheet" href="{% static '' %}" />
+<link rel="stylesheet" href="{% static '' %}" />
 {% endblock %} {% endcomment %}
 
 {% block content %}
-    <h1>Training Programs</h1>
+<h1>Training Programs</h1>
 
-    <dialog class="infoDialog">
-        <div class="infoDialog__message"></div>
-        <button class="closeDialog">Close</button>
-    </dialog>
+<dialog class="infoDialog">
+    <div class="infoDialog__message"></div>
+    <button class="closeDialog">Close</button>
+</dialog>
 
-    <a href="{% url 'hrapp:training_program_form' %}">Add Training Program</a>
+<a href="{% url 'hrapp:training_program_form' %}">Add Training Program</a>
 
-    <ol class="training_programs">
+<ol class="training_programs">
     {% for training_program in all_training_programs %}
-        <li class="program">
-            <a class="program__title" href="{% url 'hrapp:training_program' training_program.id %}"> {{ training_program.title }}</a>
+    <li class="program">
+        <a class="program__title" href="{% url 'hrapp:training_program' training_program.id %}">
+            {{ training_program.title }}</a>
 
 
-            <div class="program__length">
-                <div>Starts: {{training_program.start_date}}</div>
-               <div> Ends: {{ training_program.end_date }}</div>
-            </div>
-            <div class="capacity">Capacity: {{ training_program.capacity }}</div>
-            <div class="current_attendees"> Attendees Currently Signed Up: <div/>
-            <button id="detail--{{ training_program.id }}">Details</button>
-        </li>
+        <div class="program__length">
+            <div>Starts: {{training_program.start_date}}</div>
+            <div> Ends: {{ training_program.end_date }}</div>
+        </div>
+        <div class="capacity">Capacity: {{ training_program.capacity }}</div>
+
+        <div action="{% url 'hrapp:list_count' training_program_id %}" method="GET">
+            {% csrf_token %}
+            <div class="current_attendees"> Attendees Currently Signed Up: {{ list_count }}</div>
+        </div>
+
+        <button id="detail--{{ training_program.id }}">Details</button>
+    </li>
     {% endfor %}
-    </ol>
+</ol>
 {% endblock %}
 
 {% comment %} {% block scripts %}
-    <script src="{% static '' %}"></script>
+<script src="{% static '' %}"></script>
 {% endblock %} {% endcomment %}

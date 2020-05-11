@@ -23,10 +23,9 @@ def training_programs_list(request):
                 FROM hrapp_trainingprogram tp
                 """)
             data = db_cursor.fetchall()
-
         template_name = 'training_programs/training_program_list.html'
         context = {
-            'all_training_programs': data
+            'all_training_programs': data,
         }
         return render(request, template_name, context)
 
@@ -34,17 +33,36 @@ def training_programs_list(request):
         form_data = request.POST
         with sqlite3.connect(Connection.db_path) as conn:
             db_cursor = conn.cursor()
-
             db_cursor.execute("""
             INSERT INTO hrapp_trainingprogram
             (title, start_date, end_date, capacity
             )
             VALUES (?, ?, ?, ?)
             """,
-            (form_data['title'], form_data['start_date'],
-                form_data['end_date'], form_data['capacity']))
-
+                (form_data['title'], form_data['start_date'],
+                    form_data['end_date'], form_data['capacity']))
         return redirect(reverse('hrapp:trainingprograms'))
+
+
+def get_count(training_program_id):
+    with sqlite3.connect(Connection.db_path) as conn:
+        db_cursor = conn.cursor()
+        db_cursor.execute("""
+                SELECT
+                    COUNT(DISTINCT training_program_id = ?)
+                FROM hrapp_trainingprogramemployee
+            """, (training_program_id) )
+        return db_cursor.fetchone()
+
+
+def list_count(request, training_program_id):
+    if request.method == 'GET':
+        get_count = get_count(training_program_id)
+        template = 'training_programs/training_program_list.html'
+        context = {
+            "list_count": get_count
+        }
+        return render(request, template, context)
 
 # def create_training_program(cursor, row):
 #     _row = sqlite3.Row(cursor, row)
