@@ -9,7 +9,7 @@
 <ol>
 {% for computer in computers %}
     <li>
-        <p><a href="#">{{ computer }}</a></p>
+        <p><a href="{% url 'hrapp:computer' computer.id %}">{{ computer }}</a></p>
      
 
     </li>
