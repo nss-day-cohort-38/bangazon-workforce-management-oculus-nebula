@@ -10,3 +10,4 @@ from .training_programs.training_program_form import training_program_edit_form
 from .training_programs.training_program_details import attendee_list
 
 from .computers import computer_list
+from .computers import computer_list, computer_details

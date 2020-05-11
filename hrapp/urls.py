@@ -16,4 +16,6 @@ urlpatterns = [
     # path('trainingprograms/<int:training_program_id>/details', attendee_list, name='training_program'),
 
     path('computers/', computer_list, name="computers"),
+    path('computer/<int:computer_id>/', computer_details, name="computer"),
+
 ]

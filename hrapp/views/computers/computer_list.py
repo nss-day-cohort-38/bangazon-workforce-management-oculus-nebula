@@ -13,14 +13,8 @@ def computer_list(request):
                SELECT
                 c.id,
                 c.make,
-                c.manufacturer,
-                ec.assign_date,
-                ec.unassign_date,
-                e.first_name,
-                e.last_name
+                c.manufacturer
                 from hrapp_computer c
-                join hrapp_employeecomputer ec on ec.computer_id = c.id
-                join hrapp_employee e on ec.employee_id = e.id;
             """)
 
             all_computers = db_cursor.fetchall()
