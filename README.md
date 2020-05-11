@@ -1,44 +1,17 @@
-## Steps to get your project started:
+# Oculus Nebula, llc.
+Created: 05-08-20 | Modified:
 
-* Clone down your team's repo and `cd` into it
+Directions to start project [here](directions/start_project.md)
+---
 
-* Create your OSX/Linux OS virtual environment in Terminal:
+## Description
+This application allows Human Resources employee's keep records on the Oculus Nebula company. 
 
-  * `python -m venv workforceenv`
-  * `source ./workforceenv/bin/activate`
+## Features
 
-* Or create your Windows virtual environment in Command Line:
+- ### [Managing Employees](directions/employee.md)
+- ### [Managing Departments](directions/departments.md)
+- ### [Managing Employee Computers](directions/employee_computers.md)
+- ### [Managing Employee Training](directions/employee_training.md)
 
-  * `python -m venv workforceenv`
-  * `source ./workforceenv/Scripts/activate`
-
-* Install the app's dependencies:
-
-  * `pip install -r requirements.txt`
-
-* Build your database from the existing models:
-
-  * `python manage.py makemigrations hrapp`
-  * `python manage.py migrate`
-
-* Create a superuser for your local version of the app:
-
-  * `python manage.py createsuperuser`
-
-* Populate your database with initial data from fixtures files: (_NOTE: every time you run this it will remove existing data and repopulate the tables_)
-
-  * `python manage.py loaddata computers`
-  * `python manage.py loaddata users`
-
-* Fire up your dev server and get to work!
-
-  * `python manage.py runserver`
-
-
-## Official Bangazon LLC ERD
-
-Our team of database developers and administrators developed this ERD for you to reference when creating your models.
-
-https://dbdiagram.io/d/5eb4d41339d18f5553fedf9e
-
-Not that the column names do not conform to the Python community standards (PEP) for naming conventions. Make sure your models use snake case.
+---
