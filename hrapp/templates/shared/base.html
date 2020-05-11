@@ -15,12 +15,12 @@
 <body>
     <nav id="site-nav">
         <ol class="navList">
-            <li class="navList__route"><a href="{% url 'libraryapp:home' %}">Home</a></li>
-            <li class="navList__route"><a href="{% url 'libraryapp:employees' %}">Employees</a></li>
-            {% comment %} <li class="navList__route"><a href="{% url 'libraryapp:departments' %}">Departments</a></li> {% endcomment %}
-            <li class="navList__route"><a href="{% url 'libraryapp:computers' %}">Computers</a></li>
-            <li class="navList__route"><a href="{% url 'libraryapp:trainingprograms' %}">Training Programs</a></li>
-            <li class="navList__route"><a href="{% url 'libraryapp:logout' %}">Logout</a></li>
+            <li class="navList__route"><a href="{% url 'hrapp:home' %}">Home</a></li>
+            <li class="navList__route"><a href="{% url 'hrapp:employee_list' %}">Employees</a></li>
+            {% comment %} <li class="navList__route"><a href="{% url 'hrapp:departments' %}">Departments</a></li> {% endcomment %}
+            <li class="navList__route"><a href="{% url 'hrapp:computers' %}">Computers</a></li>
+            <li class="navList__route"><a href="{% url 'hrapp:trainingprograms' %}">Training Programs</a></li>
+            <li class="navList__route"><a href="{% url 'hrapp:logout' %}">Logout</a></li>
         </ol>
     </nav>
 
