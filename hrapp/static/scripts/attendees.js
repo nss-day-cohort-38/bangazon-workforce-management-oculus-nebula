@@ -4,7 +4,7 @@ const isElement = (element) => {
 };
 
 const isInDOM = isElement(employeeListPrograms);
-if (isInDOM === false) {
+if (!isInDOM) {
     const notInDoc = document.querySelector(".no_list");
     notInDoc.innerHTML = "There Are No Employees In This Program";
 };
