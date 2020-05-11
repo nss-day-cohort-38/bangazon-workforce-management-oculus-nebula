@@ -28,10 +28,11 @@
         </div>
         <div class="capacity">Capacity: {{ training_program.capacity }}</div>
 
-        <div action="{% url 'hrapp:list_count' training_program_id %}" method="GET">
-            {% csrf_token %}
+        {% comment %} <div action="{% url 'hrapp:list_count' training_program.id %}" method="GET">
+            {% csrf_token %} {% endcomment %}
             <div class="current_attendees"> Attendees Currently Signed Up: {{ list_count }}</div>
-        </div>
+        {% comment %} </div> {% endcomment %}
+
 
         <button id="detail--{{ training_program.id }}">Details</button>
     </li>

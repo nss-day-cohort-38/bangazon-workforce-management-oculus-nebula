@@ -7,24 +7,6 @@ from ..connection import Connection
 from .training_program_details import get_training_program
 
 
-
-# def get_training_program(training_program_id):
-#     with sqlite3.connect(Connection.db_path) as conn:
-#         conn.row_factory = model_factory(TrainingProgram)
-#         db_cursor = conn.cursor()
-#         db_cursor.execute("""
-#             SELECT
-#                 tp.id,
-#                 tp.title,
-#                 tp.start_date,
-#                 tp.end_date,
-#                 tp.capacity
-#             FROM hrapp_trainingprogram tp
-#             WHERE tp.id = ?
-#             """ , (training_program_id))
-#         return db_cursor.fetchone()
-
-
 def get_training_programs():
     with sqlite3.connect(Connection.db_path) as conn:
         conn.row_factory = model_factory(TrainingProgram)
