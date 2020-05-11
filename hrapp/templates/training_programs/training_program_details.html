@@ -12,8 +12,8 @@
         <div>End Date: {{ training_program.end_date }}</div>
 
         {% if training_program.employee.id is not null %}
-        <div>Attendees: {{ training_program.employee }}</div>
-        <div>Count: {{ get_count }}</div>
+        {% comment %} <div>Attendees: {{ training_program.employee }}</div> {% endcomment %}
+        <div>Number Of Attendees Currently Signed Up: {{ get_count }}</div>
         {% else %}
         <div>Attendees: No one currently signed up for this training program. </div>
         {% endif %}

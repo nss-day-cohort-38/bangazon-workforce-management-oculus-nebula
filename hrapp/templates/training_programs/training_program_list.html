@@ -1,9 +1,9 @@
 {% extends 'shared/base.html' %}
 {% load static %}
 
-{% comment %} {% block css %}
-<link rel="stylesheet" href="{% static '' %}" />
-{% endblock %} {% endcomment %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'styles/base.css' %}" />
+{% endblock %} 
 
 {% block content %}
 <h1>Training Programs</h1>
@@ -30,7 +30,7 @@
 
         {% comment %} <div action="{% url 'hrapp:list_count' training_program.id %}" method="GET">
             {% csrf_token %} {% endcomment %}
-            <div class="current_attendees"> Attendees Currently Signed Up: {{ list_count }}</div>
+            {% comment %} <div class="current_attendees"> Attendees Currently Signed Up: {{ list_count }}</div> {% endcomment %}
         {% comment %} </div> {% endcomment %}
 
 
@@ -40,6 +40,6 @@
 </ol>
 {% endblock %}
 
-{% comment %} {% block scripts %}
-<script src="{% static '' %}"></script>
-{% endblock %} {% endcomment %}
+{% block scripts %}
+<script src="{% static 'scripts/trainingPrograms.js' %}"></script>
+{% endblock %} 
