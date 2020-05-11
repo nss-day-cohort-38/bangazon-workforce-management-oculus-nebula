@@ -28,7 +28,6 @@ def create_training_program(cursor, row):
     employee.first_name = _row["first_name"]
     employee.last_name = _row["last_name"]
     employee.start_date = _row["start_date"]
-    employee.is_supervisor = _row["is_supervisor"]
 
     # return (training_program, employee,)
     # training_program.training_program_employee = training_program
@@ -43,26 +42,25 @@ def get_training_program(training_program_id):
         db_cursor = conn.cursor()
 
         db_cursor.execute("""
-        SELECT
-            tp.id,
-            tp.title,
-            tp.start_date,
-            tp.end_date,
-            tp.capacity,
-            e.id,
-            e.first_name,
-            e.last_name,
-            e.start_date,
-            e.is_supervisor,
-            etp.employee_id,
-            etp.training_program_id
-        FROM hrapp_trainingprogramemployee etp
-        JOIN hrapp_trainingprogram tp ON tp.id = etp.training_program_id
-        JOIN hrapp_employee e ON etp.training_program_id = tp.id
+           SELECT
+             tp.id,
+             tp.title,
+             tp.start_date,
+             tp.end_date,
+             tp.capacity,
+             e.id,
+             e.first_name,
+             e.last_name,
+             e.start_date,
+             etp.id,
+             etp.employee_id,
+             etp.training_program_id
+         FROM hrapp_trainingprogram tp
+         LEFT JOIN hrapp_trainingprogramemployee etp ON etp.training_program_id = tp.id
+         LEFT JOIN hrapp_employee e ON etp.employee_id = e.id
         WHERE tp.id = ?
         """, (training_program_id,))
         return db_cursor.fetchone()
-
 
 
 

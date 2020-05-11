@@ -11,12 +11,17 @@
         <div>Start Date: {{ training_program.start_date }}</div>
         <div>End Date: {{ training_program.end_date }}</div>
 
+        {% if training_program.employee.id is not null %}
         <div>Attendees: {{ training_program.employee }} </div>
+        {% else %}
+        <div>Attendees: No one currently signed up for this training program. </div>
+        {% endif %}
 
+{% comment %} 
         {% for attendee in all_attendees %}
         <div>{{ attendee.first_name }}</div>
         {% endfor %}
-                <div>{{ all_attendees.first_name }}</div>
+                <div>{{ all_attendees.first_name }}</div> {% endcomment %}
 
 
 
