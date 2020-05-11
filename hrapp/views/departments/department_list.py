@@ -13,14 +13,13 @@ def department_list(request):
             db_cursor = conn.cursor()
 
             db_cursor.execute("""
-            SELECT
+          SELECT COUNT(department_name) employees,
                 d.id,
                 d.department_name,
-                d.budget,
-                e.department_id
-            FROM hrapp_department d
-            JOIN hrapp_employee e 
-            ON d.id = e.department_id
+                d.budget
+            FROM hrapp_department d, hrapp_employee e
+            WHERE d.id = e.department_id
+            GROUP BY d.department_name
             """)
 
             all_departments = []
@@ -31,7 +30,7 @@ def department_list(request):
                 department.id = row['id']
                 department.department_name = row['department_name']
                 department.budget = row['budget']
-                department.employees = row['department_id']
+                department.employees = row['employees']
                 
                 all_departments.append(department)
 
