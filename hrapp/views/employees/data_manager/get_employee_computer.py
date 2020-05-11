@@ -20,7 +20,7 @@ def get_employee_computers(employee_id):
             AND ec.unassign_date IS NULL
         """, (employee_id, ))
 
-        dataset = db_cursor.fetchall()
+        dataset = db_cursor.fetchone()
         
         return dataset
 
