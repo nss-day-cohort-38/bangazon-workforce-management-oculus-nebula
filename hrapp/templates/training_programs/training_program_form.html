@@ -13,7 +13,7 @@
     {% if training_program.id is not None %}
         <form action="{% url 'hrapp:training_program' training_program.id %}" method="post">
     {% else %}
-        <form action="{% url 'hrapp:training_programs' %}" method="post">
+        <form action="{% url 'hrapp:training_program_form' %}" method="post">
     {% endif %}
         {% csrf_token %}
         <fieldset>
@@ -21,28 +21,30 @@
             <input id="title" type="text" name="title" value="{{ training_program.title }}">
         </fieldset>
         <fieldset>
-            <label for="start_date">Start Date: </label>
-            <input id="start_date" type="date" name="start_date" value="{{ training_program.start_date }}">
+            <label for="start_date">Start Date (yyyy/mm/dd): </label>
+            <input id="start_date" type="text" name="start_date" value="{{ training_program.start_date }}">
         </fieldset>
         <fieldset>
-            <label for="end_date">End Date: </label>
-            <input id="end_date" type="date" name="end_date" value="{{ training_program.end_date }}">
+            <label for="end_date">End Date (yyyy/mm/dd): </label>
+            <input id="end_date" type="text" name="end_date" value="{{ training_program.end_date }}">
         </fieldset>
         <fieldset>
             <label for="capacity">Capacity: </label>
             <input id="capacity" type="text" name="capacity" value="{{ training_program.capacity }}">
         </fieldset>
+        {% if training_program.id is not None %}
         <fieldset>
-            <label for="employees">Employees: </label>
-            <select id="employees" type="text" name="employees">
-                {% for employee in training_programs %}
-                <option {% if employee.id == training_.location_id %}selected{% endif %} value="{{ library.id }}">
-                    {{ library.title }}</option>
+            <label for="employee">Employees: </label>
+            <select id="employee" type="text" name="employee">
+                {% for employee in employees %}
+                <option {% if employee.id == trainingprogramemployee.employee_id %}selected{% endif %} value="{{ employee.id }}">
+                    {{ employee.first_name }} {{ employee.last_name}}</option>
                 {% endfor %}
             </select>
         </fieldset>
+        {% endif %}
 
-        {% if book.id is not None %}
+        {% if training_program.id is not None %}
             <input type="hidden" name="actual_method" value="PUT">
             <input type="submit" value="Update" />
         {% else %}
