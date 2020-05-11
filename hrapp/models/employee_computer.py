@@ -12,7 +12,7 @@ class EmployeeComputer(models.Model):
     computer = models.ForeignKey("Computer", on_delete=models.CASCADE)
     assign_date = models.DateField()
     unassign_date = models.DateField( null=True, blank=True)
-
+ 
     class Meta:
         verbose_name = "computer and employee"
         verbose_name_plural = "computers and employees"
