@@ -13,8 +13,7 @@ def get_computer(computer_id):
 
         #database select
         db_cursor.execute("""
-            SELECT
-                c.id,
+            SELECT c.id,
                 c.make,
                 c.manufacturer,
                 c.purchase_date,
@@ -22,7 +21,8 @@ def get_computer(computer_id):
                 ec.assign_date,
                 ec.unassign_date,
                 e.first_name,
-                e.last_name
+                e.last_name,
+                COUNT(e.first_name) count
                 from hrapp_computer c
                 left join hrapp_employeecomputer ec on ec.computer_id = c.id
                 left join hrapp_employee e on ec.employee_id = e.id
@@ -81,6 +81,19 @@ def confirm_computer_delete(request, computer_id):
 
     return render(request, template, context)
 
+
+# def create_computer(cursor, row):
+#     _row = sqlite3.Row(cursor, row)
+
+#     computer = Computer()
+#     computer["id"] = _row["id"]
+#     computer["first_name"] = _row["first_name"]
+#     computer["last_name"] = _row["last_name"]
+#     computer["purchase_date"] = _row["purchase_date"]
+#     computer ["unassign_date"] = _row["unassign_date"]
+#     computer["make"] = _row["make"]
+#     computer["manufacturer"] = _row["manufacturer"]
+#     computer["count"] = row["count"]
 
 
 
