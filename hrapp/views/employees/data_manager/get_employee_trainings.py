@@ -1,6 +1,8 @@
 import sqlite3
 from ...connection import Connection
 from hrapp.models import model_factory, TrainingProgramEmployee
+
+
 def get_employee_training(employee_id):
     """
     This function gets all of the training programs a user has from hrapp_trainingprogramemployee
@@ -20,7 +22,9 @@ def get_employee_training(employee_id):
         """, (employee_id, ))
 
         dataset = db_cursor.fetchall()
-
-        return dataset
-
+        newdataset = []
+        for item in dataset:
+            if not item.training_program.archived:
+                newdataset.append(item)
+        return newdataset
 
