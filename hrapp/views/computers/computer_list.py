@@ -38,6 +38,9 @@ def computer_list(request):
         with sqlite3.connect(Connection.db_path) as conn:
             conn.row_factory = model_factory(Computer)
             db_cursor = conn.cursor()
+            now = datetime.datetime.now()
+            assigned_date = now.strftime("%Y-%m-%d")
+            computer = get_last_computer()
             
 
             #get the correct information from the db
@@ -48,12 +51,6 @@ def computer_list(request):
                 #fetch the information by name or by id
                 form_data['manufacturer'], form_data['make'], form_data['purchase_date']
             ))
-            # conn.row_factory = model_factory(EmployeeComputer)
-            # db_cursor = conn.cursor()
-            computer = get_last_computer()
-            now = datetime.datetime.now()
-            assigned_date = now.strftime("%Y-%m-%d")
-
             if form_data["employee"] != "Not Assigned":
                 db_cursor.execute("""
                     INSERT into hrapp_employeecomputer (computer_id, employee_id, assign_date, unassign_date)
