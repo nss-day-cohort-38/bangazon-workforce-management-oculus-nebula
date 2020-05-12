@@ -16,8 +16,11 @@
     </ul>
 </p>
 
-    <p>Assigned Computer: {{ employee_computers|join:", " }} {% if not employee_computers %}No Computer{% endif %}</p>
+    <p>Assigned Computer: {{ employee_computers.computer }} {% if not employee_computers %}No Computer{% endif %}</p>
 
-    
+    <form action="{% url "hrapp:employee_edit" employee.id%}">
+        {% csrf_token %}
+        <input type="submit" value="Edit Employee">
+    </form>
     
 {% endblock content %}
