@@ -29,7 +29,8 @@ def get_computer(computer_id):
                 where c.id = ?
         """, (computer_id,))
         #return the results from the fetch call
-        return db_cursor.fetchone()
+        data = db_cursor.fetchall()[-1]
+        return data
 
 def computer_details(request, computer_id):
     print('comput', computer_id)

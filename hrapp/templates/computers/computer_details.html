@@ -8,7 +8,7 @@
         <li>Make: {{computer.manufacturer}}</li>
         <li>Model: {{computer.make}}</li>
         <li>Purchased: {{computer.purchase_date}}</li>
-        {%if computer.first_name == null%}
+        {%if computer.unassign_date != null%}
         <li> Not assigned to an employee yet.</li>
         {%else%}
         <li>Assigned to: {{computer.first_name}} {{computer.last_name}} (assigned: {{computer.assign_date}})</li>
@@ -16,7 +16,7 @@
 
     </ul>
     {% comment %} test to see if the computer has been assigned {% endcomment %}
-    {%if computer.first_name == null%}
+    {%if computer.unassign_date != null%}
     <a href="{% url 'hrapp:confirm_computer_delete' computer.id%}">Delete</a>
 
     {%else%}
