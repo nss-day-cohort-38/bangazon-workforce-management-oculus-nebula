@@ -11,6 +11,7 @@ class TrainingProgram(models.Model):
     capacity = models.IntegerField()
     employees = models.ManyToManyField(
         "Employee", through='TrainingProgramEmployee')
+    archived = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = "trainingprogram"

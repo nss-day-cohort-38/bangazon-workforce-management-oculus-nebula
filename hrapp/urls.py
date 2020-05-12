@@ -21,6 +21,7 @@ urlpatterns = [
     path('computer/<int:computer_id>/', computer_details, name="computer"),
     path('departments/', department_list, name="departments"),
     path('department/<int:department_id>/', department_detail, name="department"),
+    path('department/form/', department_form, name="department_form"),
     path('computer/<int:computer_id>/', computer_details, name="computer"),
     path('computer/form/', computer_form, name='computer_form'),
     path('computer/delete/<int:computer_id>/', confirm_computer_delete, name='confirm_computer_delete'),
