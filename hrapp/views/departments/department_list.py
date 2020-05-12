@@ -5,7 +5,6 @@ from ..connection import Connection
 
 
 
-
 def department_list(request):
     if request.method == 'GET':
         with sqlite3.connect(Connection.db_path) as conn:
@@ -24,14 +23,14 @@ def department_list(request):
 
             all_departments = []
             dataset = db_cursor.fetchall()
-            
+
             for row in dataset:
                 department = Department()
                 department.id = row['id']
                 department.department_name = row['department_name']
                 department.budget = row['budget']
                 department.employees = row['employees']
-                
+
                 all_departments.append(department)
 
     template = 'departments/departments_list.html'
