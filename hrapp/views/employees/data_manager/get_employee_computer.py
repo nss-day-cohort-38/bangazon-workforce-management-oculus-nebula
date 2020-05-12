@@ -3,7 +3,7 @@ from ...connection import Connection
 from hrapp.models import model_factory, EmployeeComputer
 def get_employee_computers(employee_id):
     """
-    This function gets all of the active computers a user has from hrapp_employeecomputer
+    This function gets the active computer a user has from hrapp_employeecomputer
     """
     with sqlite3.connect(Connection.db_path) as conn:
         conn.row_factory = model_factory(EmployeeComputer)
@@ -20,7 +20,7 @@ def get_employee_computers(employee_id):
             AND ec.unassign_date IS NULL
         """, (employee_id, ))
 
-        dataset = db_cursor.fetchall()
+        dataset = db_cursor.fetchone()
         
         return dataset
 
