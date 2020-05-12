@@ -1,7 +1,8 @@
 import sqlite3
+import datetime
 from django.shortcuts import render ,redirect
 from django.urls import reverse
-from hrapp.models import Computer, model_factory
+from hrapp.models import Computer, model_factory, EmployeeComputer
 from ..connection import Connection
 
 def computer_list(request):
@@ -37,6 +38,8 @@ def computer_list(request):
         with sqlite3.connect(Connection.db_path) as conn:
             conn.row_factory = model_factory(Computer)
             db_cursor = conn.cursor()
+            now = datetime.datetime.now()
+            assigned_date = now.strftime("%Y-%m-%d")
 
             #get the correct information from the db
             db_cursor.execute("""
@@ -46,6 +49,15 @@ def computer_list(request):
                 #fetch the information by name or by id
                 form_data['manufacturer'], form_data['make'], form_data['purchase_date']
             ))
+            conn.row_factory = model_factory(EmployeeComputer)
+            db_cursor = conn.cursor()
+
+            if form_data["employee"] != "Not Assigned":
+                db_cursor.execute("""
+                    INSERT into hrapp_employeecomputer ()
+
+                """)
+
             #send the user back to the master list with the updated computer
             return redirect(reverse('hrapp:computers'))
     

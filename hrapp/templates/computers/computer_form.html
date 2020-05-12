@@ -16,9 +16,9 @@
     <input type="date" id="purchase_date" name="purchase_date">
 </fieldset>
 <fieldset ='comp-set'>
-<label for='employee'>Employee</label>
-<select>
-
+<label for='employee'>Employee: </label>
+<select id = "employee" name="employee">
+<option value="Not Assigned" selected>Not Assigned</option>
 {% comment %} Loop over employees to populate dropdown {% endcomment %}
 
 {% for employee in employees %}
@@ -30,7 +30,7 @@
 {%endif%}
 {% endfor %}
 </select>
-
+<input type="hidden" value="{{computer.id}}" id="computerId" />
 </fieldset>
 <fieldset>
 <input type="submit" value="Add Computer"/>
