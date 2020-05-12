@@ -1,7 +1,7 @@
 import sqlite3
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.decorators import login_required
-from hrapp.models import TrainingProgram, Employee
+from hrapp.models import TrainingProgram, Employee, TrainingProgramEmployee
 from hrapp.models import model_factory
 from ..connection import Connection
 from .training_program_details import get_training_program
@@ -39,6 +39,17 @@ def get_employees():
         return db_cursor.fetchall()
 
 
+def get_training_program_employees():
+    with sqlite3.connect(Connection.db_path) as conn:
+        conn.row_factory = model_factory(TrainingProgramEmployee)
+        db_cursor = conn.cursor()
+        db_cursor.execute("""
+        SELECT *
+        FROM hrapp_trainingprogramemployee tpe
+        """)
+        return db_cursor.fetchall()
+
+
 @login_required
 def training_program_form(request):
     if request.method == 'GET':
@@ -55,9 +66,26 @@ def training_program_edit_form(request, training_program_id):
     if request.method == 'GET':
         training_program = get_training_program(training_program_id)
         employees = get_employees()
+        training_program_employees = get_training_program_employees()
         template = "training_programs/training_program_form.html"
         context = {
             "training_program": training_program,
-            "employees": employees
+            "employees": employees,
+            "training_program_employees": training_program_employees
         }
         return render(request, template, context)
+
+    elif request.method == 'POST':
+        form_data = request.POST
+        if (
+            "actual_method" in form_data
+            and form_data["actual_method"] == "PUT"
+        ):
+            with sqlite3.connect(Connection.db_path) as conn:
+                db_cursor = conn.cursor()
+                db_cursor.execute("""
+                    INSERT INTO hrapp_trainingprogramemployee (employee_id, training_program_id)
+                    VALUES (?, ?)
+                """,
+                    (form_data['employee_id'], training_program_id,))
+            return redirect(reverse('hrapp:trainingprograms'))
