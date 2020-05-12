@@ -18,8 +18,12 @@
 <fieldset ='comp-set'>
 <label for='employee'>Employee</label>
 <select>
+
+{% comment %} Loop over employees to populate dropdown {% endcomment %}
+
 {% for employee in employees %}
 {%if employee.is_supervisor%}
+{% comment %} if there is a supervisor add a star {% endcomment %}
 <option value="{{employe.id}}">*<strong>{{employee}}</strong> {{employe.id}} </option>
 {%else%}
 <option value = "{{employe.id}}">{{employee}} {{employe.id}}</option>
