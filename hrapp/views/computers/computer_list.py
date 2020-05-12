@@ -38,8 +38,7 @@ def computer_list(request):
         with sqlite3.connect(Connection.db_path) as conn:
             conn.row_factory = model_factory(Computer)
             db_cursor = conn.cursor()
-            now = datetime.datetime.now()
-            assigned_date = now.strftime("%Y-%m-%d")
+            
 
             #get the correct information from the db
             db_cursor.execute("""
@@ -51,17 +50,35 @@ def computer_list(request):
             ))
             # conn.row_factory = model_factory(EmployeeComputer)
             # db_cursor = conn.cursor()
-            print(form_data)
+            computer = get_last_computer()
+            now = datetime.datetime.now()
+            assigned_date = now.strftime("%Y-%m-%d")
 
             if form_data["employee"] != "Not Assigned":
                 db_cursor.execute("""
-                    INSERT into hrapp_employeecomputer (computer_id, employee_id, assign_date)
-                    values(?,?,?)
+                    INSERT into hrapp_employeecomputer (computer_id, employee_id, assign_date, unassign_date)
+                    values(?,?,?, null)
 
                 """, (
-                    form_data.get('computerId', False), form_data['employee'], assigned_date
+                    computer.id, form_data['employee'], assigned_date
                 ))
 
             #send the user back to the master list with the updated computer
             return redirect(reverse('hrapp:computers'))
+
+
+
+def get_last_computer():
+    with sqlite3.connect(Connection.db_path) as conn:
+        conn.row_factory = model_factory(Computer)
+        db_cursor = conn.cursor()
+
+        db_cursor.execute("""
+            SELECT *
+            from hrapp_computer c
+        """)
+
+        data= db_cursor.fetchall()[-1]
+
+        return data
     
