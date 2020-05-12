@@ -7,17 +7,30 @@
     <title>Bangazon Workforce Management</title>
 
     <link rel="stylesheet" href="{% static 'styles/base.css' %}" type="text/css" media="screen" />
-
+    <link rel="stylesheet" href="{% static 'styles/comp_modal.css' %}" type="text/css" media="screen" />
     {% block css %}
     {% endblock %}
 </head>
 
 <body>
+    <nav id="site-nav">
+        <ol class="navList">
+            <li class="navList__route"><a href="{% url 'hrapp:home' %}">Home</a></li>
+            <li class="navList__route"><a href="{% url 'hrapp:employee_list' %}">Employees</a></li>
+            <li class="navList__route"><a href="{% url 'hrapp:departments' %}">Departments</a></li> 
+            <li class="navList__route"><a href="{% url 'hrapp:computers' %}">Computers</a></li>
+            <li class="navList__route"><a href="{% url 'hrapp:trainingprograms' %}">Training Programs</a></li>
+            <li class="navList__route"><a href="{% url 'hrapp:logout' %}">Logout</a></li>
+        </ol>
+    </nav>
 
-    {% block content %}
-    {% endblock %}
+    <main class="main-content">
+        {% block content %}
+        {% endblock %}
+    </main>
 
-    {% block scripts %}
+
+    {%block scripts%}
     {% endblock scripts %}
 
 </body>
