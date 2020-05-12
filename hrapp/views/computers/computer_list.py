@@ -49,8 +49,9 @@ def computer_list(request):
                 #fetch the information by name or by id
                 form_data['manufacturer'], form_data['make'], form_data['purchase_date']
             ))
-            conn.row_factory = model_factory(EmployeeComputer)
-            db_cursor = conn.cursor()
+            # conn.row_factory = model_factory(EmployeeComputer)
+            # db_cursor = conn.cursor()
+            print(form_data)
 
             if form_data["employee"] != "Not Assigned":
                 db_cursor.execute("""

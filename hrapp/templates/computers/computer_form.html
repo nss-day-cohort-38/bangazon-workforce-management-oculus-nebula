@@ -20,17 +20,15 @@
 <select id = "employee" name="employee">
 <option value="Not Assigned" selected>Not Assigned</option>
 {% comment %} Loop over employees to populate dropdown {% endcomment %}
-
 {% for employee in employees %}
 {%if employee.is_supervisor%}
 {% comment %} if there is a supervisor add a star {% endcomment %}
-<option value="{{employe.id}}">*<strong>{{employee}}</strong> {{employe.id}} </option>
+<option value="{{employee.id}}">*{{employee}} {{employee.id}} </option>
 {%else%}
-<option value = "{{employe.id}}">{{employee}} {{employe.id}}</option>
+<option value = "{{employee.id}}">{{employee}} {{employee.id}}</option>
 {%endif%}
 {% endfor %}
 </select>
-<input type="hidden" value="{{computer.id}}" name="computerId" id="computerId" />
 </fieldset>
 <fieldset>
 <input type="submit" value="Add Computer"/>
