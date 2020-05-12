@@ -12,18 +12,11 @@
         <div>End Date: {{ training_program.end_date }}</div>
 
         {% if training_program.employee.id is not null %}
-        {% comment %} <div>Attendees: {{ training_program.employee }}</div> {% endcomment %}
         <div>Number Of Attendees Currently Signed Up: {{ get_count }}</div>
         {% else %}
         <div>Attendees: No one currently signed up for this training program. </div>
         {% endif %}
       </section>
-{% comment %} 
-        {% for attendee in all_attendees %}
-        <div>{{ attendee.first_name }}</div>
-        {% endfor %}
-                <div>{{ all_attendees.first_name }}</div> {% endcomment %}
-
 
 
     <section id="training_program_actions" style="display:flex;">
@@ -39,8 +32,8 @@
         </form>
         </section>
 
-        <section class="list_of_employees"><a href="{% url 'hrapp:attendees' training_program.id %}">See List Of Employees</section>
-    </section>
+        {% comment %} <section class="list_of_employees"><a href="{% url 'hrapp:attendees' training_program.id %}">See List Of Employees</section>
+    </section> {% endcomment %}
 
 </body>
 {% endblock %}

@@ -1,4 +1,4 @@
-{% extends 'shared/base.html' %}
+{% comment %} {% extends 'shared/base.html' %}
 {% load static %}
 
 
@@ -8,6 +8,7 @@
     <section id="training-program-attendee-details">
         <ul>
     {% for attendee in attendees %}
+
         <li class="e_name">{{ attendee.first_name }} {{ attendee.last_name}}</li>
     {% endfor %}
         </ul>
@@ -18,4 +19,4 @@
 
 {% block scripts %}
 <script src="{% static 'scripts/attendees.js' %}"></script>
-{% endblock %}
+{% endblock %} {% endcomment %}
