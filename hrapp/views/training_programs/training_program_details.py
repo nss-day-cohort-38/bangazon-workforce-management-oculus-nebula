@@ -63,46 +63,6 @@ def get_training_program(training_program_id):
         return db_cursor.fetchone()
 
 
-# def attendee_list(request, training_program_id):
-#     with sqlite3.connect(Connection.db_path) as conn:
-#         conn.row_factory = model_factory(TrainingProgram)
-#         db_cursor = conn.cursor()
-#         db_cursor.execute("""
-#         SELECT
-#              tp.id,
-#              tp.title,
-#              tp.start_date,
-#              tp.end_date,
-#              tp.capacity,
-#              e.id employee_id,
-#              e.first_name,
-#              e.last_name,
-#              e.start_date,
-#              etp.id,
-#              etp.employee_id,
-#              etp.training_program_id
-#          FROM hrapp_trainingprogramemployee etp
-#          JOIN hrapp_trainingprogram tp ON tp.id = etp.training_program_id
-#          JOIN hrapp_employee e ON etp.employee_id = e.id
-#         WHERE tp.id = ?
-#         """, (training_program_id,))
-#         data = db_cursor.fetchone()
-#         all_attendees = {}
-
-#         for item in data:
-#             if item.training_program_employee.employee_id not in all_attendees:
-#                 all_attendees[item.training_program_employee.employee_id] = item.employee
-#                 all_attendees.append(item)
-#             else:
-#                 all_attendees[item.training_program_employee.employee_id].append(item)
-
-#         template = 'training_programs/training_program_details.html'
-#         context = {
-#             'all_attendees': all_attendees
-#         }
-#         return render(request, template, context)
-
-
 def get_count(training_program_id):
     with sqlite3.connect(Connection.db_path) as conn:
         db_cursor = conn.cursor()
@@ -112,16 +72,6 @@ def get_count(training_program_id):
                 WHERE training_program_id = ?
             """, (training_program_id, ))
         return db_cursor.fetchone()
-
-
-# def list_count(request, training_program_id):
-#     if request.method == 'GET':
-#         get_count = get_count(training_program_id)
-#         template = 'training_programs/training_program_list.html'
-#         context = {
-#             "list_count": get_count
-#         }
-#         return render(request, template, context)
 
 
 

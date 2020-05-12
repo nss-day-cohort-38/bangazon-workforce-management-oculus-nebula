@@ -11,7 +11,6 @@ def training_programs_list(request):
     if request.method == 'GET':
         with sqlite3.connect(Connection.db_path) as conn:
             conn.row_factory = model_factory(TrainingProgram)
-            # conn.row_factory = create_training_program
             db_cursor = conn.cursor()
             db_cursor.execute("""
                SELECT

@@ -10,7 +10,6 @@ from hrapp.models import model_factory
 def employee_attendees(request, training_program_id):
     with sqlite3.connect(Connection.db_path) as conn:
         conn.row_factory = model_factory(TrainingProgramEmployee)
-        # conn.row_factory = create_training_program
         db_cursor = conn.cursor()
         db_cursor.execute("""
                     SELECT
