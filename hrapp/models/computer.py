@@ -18,14 +18,12 @@ class Computer(models.Model):
     decommission_date = models.DateField(null=True, blank=True, default=None)
     employees = models.ManyToManyField("Employee", through='EmployeeComputer')
 
-
     class Meta:
         verbose_name = ("Computer")
         verbose_name_plural = ("Computers")
 
     def __str__(self):
         return f"{self.manufacturer}, {self.make}"
-    
 
     def get_absolute_url(self):
         return reverse("Computer_detail", kwargs={"pk": self.pk})
