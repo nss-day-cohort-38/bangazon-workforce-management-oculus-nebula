@@ -54,9 +54,12 @@ def computer_list(request):
 
             if form_data["employee"] != "Not Assigned":
                 db_cursor.execute("""
-                    INSERT into hrapp_employeecomputer ()
+                    INSERT into hrapp_employeecomputer (computer_id, employee_id, assign_date)
+                    values(?,?,?)
 
-                """)
+                """, (
+                    form_data.get('computerId', False), form_data['employee'], assigned_date
+                ))
 
             #send the user back to the master list with the updated computer
             return redirect(reverse('hrapp:computers'))
