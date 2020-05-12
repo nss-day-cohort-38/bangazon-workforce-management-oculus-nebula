@@ -4,6 +4,9 @@ from hrapp.models import model_factory, EmployeeComputer, Computer
 
 
 def get_availible_computers():
+    """
+    This function grabs all computers that are not assigned to an employee
+    """
     with sqlite3.connect(Connection.db_path) as conn:
         conn.row_factory = model_factory(Computer)
         db_cursor = conn.cursor()

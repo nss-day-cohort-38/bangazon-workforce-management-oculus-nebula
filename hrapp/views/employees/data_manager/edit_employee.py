@@ -4,6 +4,10 @@ import datetime
 
 
 def edit_employee(form_data, employee_id):
+    """
+    This function edits an employee to the hrapp_employee table
+    This function edits an employee_computer relationship to the hrapp_employeecomputer table
+    """
     with sqlite3.connect(Connection.db_path) as conn:
         db_cursor = conn.cursor()
 
