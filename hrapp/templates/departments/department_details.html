@@ -2,19 +2,21 @@
 
 {% block content %}
 <div class='header'>
-<h1>Departments</h1>
+<h1>{{ department }}</h1>
 </div>
 
 <div class="list-container">
-<ol>
-{% for department in departments %}
-    <li>
-        <p><a href="#">{{ department }}</a></p>
-        <p>Department Budget: ${{ department.budget }}</p>
-        <p>Employees Assigned: {{ department.employees }}</p>
+
         
-    </li>
-{% endfor %}
-</ol>
+        {% comment %} <p>Department Budget: ${{ department.budget }}</p> {% endcomment %}
+        
+        <p>Assigned Employees: </p>
+                <ol>
+                        {% for employee in employees %}
+                        <li>
+                        {{ employee.first_name }} {{ employee.last_name }}
+                        </li> 
+                        {% endfor %}      
+                </ol>
 <div class="list-container">
 {% endblock content %}

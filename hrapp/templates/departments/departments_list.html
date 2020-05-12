@@ -10,8 +10,8 @@
 {% for department in departments %}
     <li>
         <p><a href="{% url 'hrapp:department' department.id %}">{{ department }}</a></p>
-        {% comment %} <p>Department Budget: ${{ department.budget }}</p>
-        <p>Employees Assigned: {{ department.employees }}</p> {% endcomment %}
+        <p>Department Budget: ${{ department.budget }}</p>
+        <p>Employees Assigned: {{ department.employees }}</p>
         
     </li>
 {% endfor %}
