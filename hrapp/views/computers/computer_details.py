@@ -51,7 +51,7 @@ def computer_details(request, computer_id):
             "actual_method" in form_data
             and form_data["actual_method"] == 'DELETE'
         ):
-            print("yes we made it ya bish")
+            #Connect to the database and delete the computer with the id of the computer from the details page.
             with sqlite3.connect(Connection.db_path) as conn:
                 db_cursor = conn.cursor()
 
@@ -68,7 +68,10 @@ def computer_details(request, computer_id):
 
 
 def confirm_computer_delete(request, computer_id):
-
+    '''
+    This function renders the confirm delete html for when the user clicks delete on the details page it passes in the template for 
+    that future html and passes the id of the computer they want to delete
+    '''
     template='computers/computer_delete.html'
 
     context = {

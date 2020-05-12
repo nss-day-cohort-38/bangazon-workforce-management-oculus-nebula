@@ -15,6 +15,7 @@
         {% endif %}
 
     </ul>
+    {% comment %} test to see if the computer has been assigned {% endcomment %}
     {%if computer.first_name == null%}
     <a href="{% url 'hrapp:confirm_computer_delete' computer.id%}">Delete</a>
 
