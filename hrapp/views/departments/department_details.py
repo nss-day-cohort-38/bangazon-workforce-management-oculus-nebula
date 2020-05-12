@@ -5,23 +5,6 @@ from hrapp.models import Department, Employee
 from hrapp.models import model_factory
 from ..connection import Connection
 
-# def create_department(cursor, row):
-#     _row = sqlite3.Row(cursor, row)
-    
-#     department = Department()
-#     department.id = row["id"]
-#     department.department_name = row["department_name"]
-#     department.budget = row["budget"]
-    
-#     department.employees = []
-    
-#     employee = Employee()
-#     employee.id = row["id"]
-#     employee.first_name = row["first_name"]
-#     employee.last_name = row["last_name"]
-    
-#     return (department, employee,)
-
 def get_employees(department_id):
     with sqlite3.connect(Connection.db_path) as conn:
         conn.row_factory = sqlite3.Row
