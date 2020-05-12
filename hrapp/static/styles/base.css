@@ -8,3 +8,12 @@ body {
 .main-content {
   padding: 1em 2em;
 }
+
+.navList {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-evenly;
+  border: 1px solid lightgray;
+  padding: 1em;
+  margin: 0;
+}
