@@ -1,10 +1,12 @@
 import sqlite3
+import datetime
 from django.urls import reverse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from hrapp.models import TrainingProgram, Employee, TrainingProgramEmployee
 from hrapp.models import model_factory
 from ..connection import Connection
+
 
 
 def create_training_program(cursor, row):
@@ -79,10 +81,15 @@ def get_count(training_program_id):
 def training_program_details(request, training_program_id):
     if request.method == 'GET':
         training_program = get_training_program(training_program_id)
+        current_date = datetime.date.today()
+        start_date_program = datetime.datetime.strptime(training_program.start_date,
+        '%Y-%m-%d').date() 
         count = get_count(training_program_id)
         template = 'training_programs/training_program_details.html'
         context = {
             "training_program": training_program,
+            "start_date_program": start_date_program,
+            "current_date": current_date,
             "get_count": count[0]
         }
         return render(request, template, context)
@@ -113,7 +120,8 @@ def training_program_details(request, training_program_id):
             with sqlite3.connect(Connection.db_path) as conn:
                 db_cursor = conn.cursor()
                 db_cursor.execute("""
-                DELETE FROM hrapp_trainingprogram
+                UPDATE hrapp_trainingprogram
+                SET 
                 WHERE id = ?
                 """, (training_program_id, ))
             return redirect(reverse('hrapp:trainingprograms'))

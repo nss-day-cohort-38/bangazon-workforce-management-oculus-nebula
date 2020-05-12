@@ -1,7 +1,7 @@
 from .home import home
 from .auth.logout import logout_user
 from .connection import Connection 
-from .departments import department_list, department_detail
+from .departments import department_list, department_detail, department_form
 from .computers import computer_list, computer_details, computer_form
 from .training_programs.training_programs_list import training_programs_list
 from .training_programs.training_program_details import training_program_details
