@@ -4,7 +4,6 @@
     <h1>{{ employee.first_name }} {{ employee.last_name }}</h1>
 
     <p>Department: {{ employee.department.department_name}}</p>
-
     <a href={% url "hrapp:employee_program_form" employee.id%}>Assign to Training Program</a>
     <p>Training Programs: 
 
