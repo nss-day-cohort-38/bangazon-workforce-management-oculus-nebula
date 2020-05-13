@@ -13,7 +13,6 @@ def add_employee(form_data):
         db_cursor = conn.cursor()
 
         # Got rid of join
-        print(form_data)
         db_cursor.execute("""
                 INSERT INTO hrapp_employee (first_name, last_name, start_date, is_supervisor, department_id)
                 VALUES (?, ?, ?, ?, ?)

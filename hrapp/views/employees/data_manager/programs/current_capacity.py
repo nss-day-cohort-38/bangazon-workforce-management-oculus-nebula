@@ -19,6 +19,5 @@ def current_capacity(program_id):
 
         data = db_cursor.fetchone()
         return_this = data.count if hasattr(data, "count") else 0
-        print(return_this)
         
         return return_this
