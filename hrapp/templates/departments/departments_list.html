@@ -4,7 +4,7 @@
 <div class='header'>
 <h1>Departments</h1>
 </div>
-
+{% if request.user.is_authenticated %}
 <div class="list-container">
 <a href="{% url 'hrapp:department_form' %}">Add Department</a>
 <ol>
@@ -18,4 +18,17 @@
 {% endfor %}
 </ol>
 <div class="list-container">
+{% else %}
+<div class="list-container">
+<ol>
+{% for department in departments %}
+    <li>
+        <p>{{ department }}</p>
+        <p>Department Budget: ${{ department.budget }}</p>
+        <p>Employees Assigned: {{ department.employees }}</p>
+    </li>
+{% endfor %}
+</ol>
+<div class="list-container">
+{% endif %}
 {% endblock content %}

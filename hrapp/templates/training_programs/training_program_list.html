@@ -12,7 +12,8 @@
     <div class="infoDialog__message"></div>
     <button class="closeDialog">Close</button>
 </dialog>
-
+{% comment %} Only authenticated users can view this part of the template {% endcomment %}
+{% if request.user.is_authenticated %}
 <button class="add_tp_btn"><a href="{% url 'hrapp:training_program_form' %}">Add Training Program</button>
 
 <ol class="training_programs">
@@ -23,5 +24,16 @@
     </li>
     {% endfor %}
 </ol>
+{% comment %} This part is for users with no authentication {% endcomment %}
+{% else %}
+    <ol class="training_programs">
+    {% for training_program in all_training_programs %}
+    <li class="program">
+            {{ training_program.title }}
+    </li>
+    {% endfor %}
+</ol>
+{% endif %}
+
 
 {% endblock %} 

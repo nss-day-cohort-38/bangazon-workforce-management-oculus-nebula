@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, reverse
+from django.contrib.auth.decorators import login_required
 from .data_manager import (
     get_employee_computers, 
     get_employee_training, 
@@ -7,6 +8,8 @@ from .data_manager import (
     get_employee
 )
 
+
+@login_required
 def employee_details(request, employee_id):
     """
     This function handles all of the request to the employee's detail page
@@ -14,7 +17,8 @@ def employee_details(request, employee_id):
     if request.method == "GET":
         employee = get_employee(employee_id)
         employee_computers = get_employee_computers(employee_id)
-        employee_programs = [i.training_program for i in get_employee_training(employee_id)]
+        employee_programs = [
+            i.training_program for i in get_employee_training(employee_id)]
         template = "employees/employee_details.html"
 
         context = {

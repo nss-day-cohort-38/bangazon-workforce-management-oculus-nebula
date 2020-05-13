@@ -5,6 +5,7 @@
 <h1>Employees</h1>
 </div>
 
+{% if request.user.is_authenticated %}
 <div class="list-container">
 <a href={% url "hrapp:employee_form"%}>Add Employee</a>
 <ol>
@@ -16,4 +17,18 @@
 {% endfor %}
 </ol>
 <div class="list-container">
+{% else %}
+<div class="list-container">
+
+<ol>
+{% for employee in employees %}
+    <li>
+        <p>{{ employee }}</p>
+        Current Department: {{employee.department}}
+    </li>
+{% endfor %}
+</ol>
+<div class="list-container">
+
+{% endif %}
 {% endblock content %}
