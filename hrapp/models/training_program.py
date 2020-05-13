@@ -10,8 +10,7 @@ class TrainingProgram(models.Model):
     end_date = models.DateField()
     capacity = models.IntegerField()
     employees = models.ManyToManyField(
-        "Employee", through='TrainingProgramEmployee')
-    archived = models.BooleanField(default=False)
+        "Employee", through='TrainingProgramEmployee', )
 
     class Meta:
         verbose_name = "trainingprogram"
