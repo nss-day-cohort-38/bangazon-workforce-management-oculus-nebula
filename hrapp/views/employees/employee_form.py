@@ -1,10 +1,11 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 from .data_manager.get_all_departments import get_all_departments
 from .data_manager.get_employee import get_employee
 from .data_manager.get_availible_computers import get_availible_computers
 from .data_manager.get_employee_computer import get_employee_computers
 
-
+@login_required
 def employee_add(request):
     """
     This function handles all of the request to the add employee page
@@ -18,7 +19,7 @@ def employee_add(request):
 
         return render(request, template, context)
 
-
+@login_required
 def employee_edit(request, employee_id):
     """
     This function handles all of the request to the edit employee page

@@ -1,9 +1,11 @@
 import sqlite3
 from django.urls import reverse
 from django.shortcuts import redirect, render
+from django.contrib.auth.decorators import login_required
 from hrapp.models import Employee, Computer, model_factory
 from ..connection import Connection
 from django import forms
+
 
 def get_employees():
     ''' 
@@ -25,9 +27,10 @@ def get_employees():
         return db_cursor.fetchall()
 
 
+@login_required
 def computer_form(request):
-    #this function calls the above function to grab all the employees (so it can populate a dropdown menu) and then sends the user to the right html
-    
+    # this function calls the above function to grab all the employees (so it can populate a dropdown menu) and then sends the user to the right html
+
     if request.method == "GET":
         employees = get_employees()
         template = 'computers/computer_form.html'
