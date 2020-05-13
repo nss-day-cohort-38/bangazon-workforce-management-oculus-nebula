@@ -1,5 +1,5 @@
 import sqlite3
-from ...connection import Connection
+from ....connection import Connection
 from hrapp.models import model_factory, TrainingProgramEmployee
 
 

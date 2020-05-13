@@ -1,10 +1,12 @@
 import sqlite3
-from ...connection import Connection
+from hrapp.views.connection import Connection
 
 
 def add_employee(form_data):
     """
-    This function adds an employee to the hrapp_employee table
+    This function takes tne passed in form_data and adds an employee to the hrapp_employee table
+
+    form_data needed: first_name, last_name, start_date, is_supervisor, department
     """
     with sqlite3.connect(Connection.db_path) as conn:
         conn.row_factory = sqlite3.Row

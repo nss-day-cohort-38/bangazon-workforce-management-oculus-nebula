@@ -1,9 +1,11 @@
-from .data_manager.get_employee_computer import get_employee_computers
-from .data_manager.get_employee_trainings import get_employee_training
-from .data_manager.get_employee import get_employee
-from .data_manager.edit_employee import edit_employee
-from .data_manager.assign_program import assign_program
 from django.shortcuts import render, redirect, reverse
+from .data_manager import (
+    get_employee_computers, 
+    get_employee_training, 
+    assign_program, 
+    edit_employee,
+    get_employee
+)
 
 def employee_details(request, employee_id):
     """

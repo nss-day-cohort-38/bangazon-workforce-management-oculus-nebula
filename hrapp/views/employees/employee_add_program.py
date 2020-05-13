@@ -1,9 +1,10 @@
 from django.shortcuts import render
-from .data_manager.get_all_departments import get_all_departments
-from .data_manager.get_employee import get_employee
-from .data_manager.get_trainings import get_all_trainings
-from .data_manager.get_employee_trainings import get_employee_training
-
+from .data_manager import (
+    get_employee_training, 
+    get_all_trainings,
+    get_all_departments,
+    get_employee
+)
 
 
 def employee_add_program(request, employee_id):
