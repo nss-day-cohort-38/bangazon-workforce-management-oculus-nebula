@@ -43,14 +43,25 @@ body {
   margin-left: 5px;
 }
 
-a:visited {
-  color: rgb(20, 20, 214);
+a:link {
+  text-decoration: none;
+  color: rgb(32, 11, 218)
 }
-/* .past_tp_btn a:visited {
-  color: red;
-} */
+a:visited {
+  text-decoration: none;
+  color: rgb(91, 7, 148);
+}
 
 #training_program_actions {
   margin-left: 2px;
   margin-right: 2px;
+}
+
+#site-nav {
+text-decoration: none;
+}
+
+i {
+  margin-right: 2px;
+  margin-left: 2px;
 }
