@@ -26,6 +26,8 @@ def get_employees():
 
 
 def computer_form(request):
+    #this function calls the above function to grab all the employees (so it can populate a dropdown menu) and then sends the user to the right html
+    
     if request.method == "GET":
         employees = get_employees()
         template = 'computers/computer_form.html'
