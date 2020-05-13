@@ -11,7 +11,7 @@
 
 {% comment %} Only authenticated users can view this part of the template {% endcomment %}
 {% if request.user.is_authenticated %}
-<button class="add_tp_btn"><a href="{% url 'hrapp:training_program_form' %}">Add Training Program</button>
+<button class="add_tp_btn"><a href="{% url 'hrapp:training_program_form' %}">Add Training Program</a></button>
 
 <h2>Upcoming Programs</h2>
 <ol class="training_programs">
