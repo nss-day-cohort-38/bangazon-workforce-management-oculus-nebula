@@ -16,6 +16,7 @@ urlpatterns = [
     # path('trainingprograms/<int:training_program_id>/details/attendees', employee_attendees, name='attendees'),
     path('employee/<int:employee_id>', employee_details, name='employee'),
     path('employee/<int:employee_id>/form', employee_edit, name='employee_edit'),
+    path('employee/<int:employee_id>/programform', employee_add_program, name='employee_program_form'),
     path('employee/form', employee_add, name='employee_form'),
     path('computers/', computer_list, name="computers"),
     path('computer/<int:computer_id>/', computer_details, name="computer"),
