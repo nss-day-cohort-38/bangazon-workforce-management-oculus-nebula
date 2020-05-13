@@ -2,7 +2,7 @@ import sqlite3
 import datetime
 from django.urls import reverse
 from django.shortcuts import redirect, render
-from hrapp.models import Employee, Computer, model_factory
+from hrapp.models import Employee, Computer, model_factory, EmployeeComputer
 from ..connection import Connection
 from django import forms
 
@@ -21,22 +21,12 @@ def get_employees():
             e.first_name,
             e.last_name,
             e.id,
-            e.is_supervisor,
-            ec.assign_date,
-            ec.unassign_date
+            e.is_supervisor
             from hrapp_employee e
-            left join hrapp_employeecomputer ec on ec.employee_id = e.id;
         ''')
 
-        data = db_cursor.fetchall()
-        newData = []
-        for employee in data:
-            print(employee.assign_date)
-            if employee.assign_date ==None or employee.unassign_date != None:
-                newData.append(employee)
-        print(newData)
-        return newData
-
+        employees = db_cursor.fetchall()
+        return employees
 
 def computer_form(request):
     #this function calls the above function to grab all the employees (so it can populate a dropdown menu) and then sends the user to the right html

@@ -52,6 +52,7 @@ def computer_list(request):
                 form_data['manufacturer'], form_data['make'], form_data['purchase_date']
             ))
             if form_data["employee"] != "Not Assigned":
+                test_and_change_employee_computer(form_data["employee"])
                 conn.row_factory = model_factory(EmployeeComputer)
                 db_cursor = conn.cursor()
                 computer = get_last_computer()
@@ -81,4 +82,29 @@ def get_last_computer():
         data= db_cursor.fetchall()[-1]
 
         return data
+    
+def test_and_change_employee_computer(id):
+    with sqlite3.connect(Connection.db_path) as conn:
+        conn.row_factory = model_factory(Computer)
+        db_cursor = conn.cursor()
+        now = datetime.datetime.now()
+        unassigned_date = now.strftime("%Y-%m-%d")
+
+        db_cursor.execute("""
+            SELECT * from hrapp_employeecomputer
+            where employee_id = ?;
+        """, (id,))
+
+        data = db_cursor.fetchall()
+
+        for row in data:
+            if row.unassign_date == None:
+                db_cursor = conn.cursor()
+                db_cursor.execute("""
+                UPDATE hrapp_employeecomputer
+                set unassign_date = ?
+                where id = ?
+                """,(unassigned_date, row.id))
+
+
     
