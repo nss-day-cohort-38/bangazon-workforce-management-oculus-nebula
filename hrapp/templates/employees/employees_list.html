@@ -7,7 +7,7 @@
 
 {% if request.user.is_authenticated %}
 <div class="list-container">
-<a href={% url "hrapp:employee_form"%}>Add Employee</a>
+<a class="add_employee_btn" href={% url "hrapp:employee_form"%}>Add Employee</a>
 <ol>
 {% for employee in employees %}
     <li>

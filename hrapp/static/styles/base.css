@@ -30,7 +30,6 @@ body {
   width: 9%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
   cursor: pointer;
-  font-style: oblique;
   font-variant: small-caps;
 }
 .program {
@@ -64,4 +63,43 @@ text-decoration: none;
 i {
   margin-right: 2px;
   margin-left: 2px;
+}
+
+.add_computer_btn {
+  text-align: center;
+  text-transform: capitalize;
+  display: inline-block;
+  font-size: 15px;
+  border-radius: 2px;
+  margin: 0.1em;
+  width: 9%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  font-variant: small-caps;
+}
+
+.add_employee_btn {
+  text-align: center;
+  text-transform: capitalize;
+  display: inline-block;
+  font-size: 15px;
+  border-radius: 2px;
+  margin: 0.1em;
+  width: 9%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  font-variant: small-caps;
+}
+
+.add_department_btn {
+  text-align: center;
+  text-transform: capitalize;
+  display: inline-block;
+  font-size: 15px;
+  border-radius: 2px;
+  margin: 0.1em;
+  width: 9%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  font-variant: small-caps;
 }

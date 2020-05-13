@@ -6,7 +6,7 @@
 </div>
 {% if request.user.is_authenticated %}
 <div class="list-container">
-<a href="{% url 'hrapp:department_form' %}">Add Department</a>
+<a class="add_department_btn" href="{% url 'hrapp:department_form' %}">Add Department</a>
 <ol>
 {% for department in departments %}
     <li>

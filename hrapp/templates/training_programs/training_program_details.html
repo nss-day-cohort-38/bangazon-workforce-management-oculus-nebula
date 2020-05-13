@@ -26,25 +26,30 @@
             <input type="hidden" name="actual_method" value="DELETE">
             <button>Delete</button>
         </form>
+        <form action="{% url 'hrapp:training_program_edit_form' training_program.id %}" method="GET">
+            {% csrf_token %}
+            <button>Edit</button>
+        </form>
+        <section class="list_of_employees">
+            <button>
+                <a href="{% url 'hrapp:attendees' training_program.id %}">See List Of Employees Signed Up</a>
+            </button>
+        </section>
+    </section>
         {% else %}
         <form>
             {% csrf_token %}
             <input type="hidden" name="actual_method" value="DELETE">
             <button>Cannot Be Deleted(See Start Date)</button>
         </form>
-        {% endif %}
-
-        <form action="{% url 'hrapp:training_program_edit_form' training_program.id %}" method="GET">
-            {% csrf_token %}
-            <button>Edit</button>
-        </form>
-
-        <section class="list_of_employees">
+     <section class="list_of_employees">
             <button>
-                <a href="{% url 'hrapp:attendees' training_program.id %}">See List Of Employees</a>
+                <a href="{% url 'hrapp:attendees' training_program.id %}">See List Of Employees That Attended</a>
             </button>
         </section>
     </section>
+    {% endif %}
 
 </body>
+
 {% endblock %}
