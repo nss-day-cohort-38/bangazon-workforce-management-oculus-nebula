@@ -21,10 +21,4 @@ def get_employee_training(employee_id):
             te.employee_id = ?
         """, (employee_id, ))
 
-        dataset = db_cursor.fetchall()
-        newdataset = []
-        for item in dataset:
-            if not item.training_program.archived:
-                newdataset.append(item)
-        return newdataset
-
+        return db_cursor.fetchall()
