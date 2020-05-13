@@ -22,7 +22,8 @@ def get_employees():
             e.last_name,
             e.id,
             e.is_supervisor,
-            ec.assign_date
+            ec.assign_date,
+            ec.unassign_date
             from hrapp_employee e
             left join hrapp_employeecomputer ec on ec.employee_id = e.id;
         ''')
@@ -30,7 +31,8 @@ def get_employees():
         data = db_cursor.fetchall()
         newData = []
         for employee in data:
-            if employee.assign_date == "null" or employee.assign_date =="none":
+            print(employee.assign_date)
+            if employee.assign_date ==None or employee.unassign_date != None:
                 newData.append(employee)
         print(newData)
         return newData
