@@ -51,15 +51,16 @@ def computer_list(request):
                 #fetch the information by name or by id
                 form_data['manufacturer'], form_data['make'], form_data['purchase_date']
             ))
+            computer_id = db_cursor.lastrowid
             if form_data["employee"] != "Not Assigned":
                 unassign_past_computers(form_data["employee"], db_cursor)
-                computer = get_last_computer()
+                
                 db_cursor.execute("""
                     INSERT into hrapp_employeecomputer (computer_id, employee_id, assign_date, unassign_date)
                     values(?,?,?, null)
 
                 """, (
-                    (computer.id+1), form_data['employee'], assigned_date
+                    (computer_id), form_data['employee'], assigned_date
                 ))
 
             #send the user back to the master list with the updated computer
@@ -94,14 +95,14 @@ def unassign_past_computers(id, db_cursor):
     """, (id,))
 
     data = db_cursor.fetchone()
-
-    ecId = data.id
-    print("date:", unassigned_date, "id:", ecId)
-    db_cursor.execute("""
-        UPDATE hrapp_employeecomputer
-        set unassign_date = ?
-        where id = ?;
-    """, (unassigned_date, ecId))
+    if data != None:
+        ecId = data.id
+        print("date:", unassigned_date, "id:", ecId)
+        db_cursor.execute("""
+            UPDATE hrapp_employeecomputer
+            set unassign_date = ?
+            where id = ?;
+        """, (unassigned_date, ecId))
 
 
         # for row in data:
