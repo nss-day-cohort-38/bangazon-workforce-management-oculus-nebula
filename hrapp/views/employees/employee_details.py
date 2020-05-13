@@ -1,8 +1,11 @@
-from .data_manager.get_employee_computer import get_employee_computers
-from .data_manager.get_employee_trainings import get_employee_training
-from .data_manager.get_employee import get_employee
-from .data_manager.edit_employee import edit_employee
 from django.shortcuts import render, redirect, reverse
+from .data_manager import (
+    get_employee_computers, 
+    get_employee_training, 
+    assign_program, 
+    edit_employee,
+    get_employee
+)
 
 def employee_details(request, employee_id):
     """
@@ -27,4 +30,9 @@ def employee_details(request, employee_id):
         if "actual_method" in form_data and form_data["actual_method"] == "PUT":
             edit_employee(form_data, employee_id)
             return redirect("hrapp:employee", employee_id=employee_id)
+        elif "actual_method" in form_data and form_data["actual_method"] == "AssignProgram":
+            assign_program(employee_id, form_data["program"])
+            return redirect("hrapp:employee", employee_id=employee_id)
+
+        
         

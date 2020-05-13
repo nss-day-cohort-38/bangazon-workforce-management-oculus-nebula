@@ -1,8 +1,11 @@
 from django.shortcuts import render
-from .data_manager.get_all_departments import get_all_departments
-from .data_manager.get_employee import get_employee
-from .data_manager.get_availible_computers import get_availible_computers
-from .data_manager.get_employee_computer import get_employee_computers
+
+from .data_manager import (
+    get_all_departments,
+    get_employee,
+    get_employee_computers,
+    get_availible_computers
+)
 
 
 def employee_add(request):

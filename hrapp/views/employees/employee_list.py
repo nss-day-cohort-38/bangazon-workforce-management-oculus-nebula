@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, reverse
-from hrapp.models import Employee
-from .data_manager.get_all_employees import get_all_employees
-from .data_manager.add_employee import add_employee
-
+from .data_manager import (
+    add_employee,
+    get_all_employees
+)
 
 def employee_list(request):
     """
