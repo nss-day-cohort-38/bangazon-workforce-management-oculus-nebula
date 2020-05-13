@@ -18,13 +18,21 @@
         {% endif %}
       </section>
 
-
+    
     <section id="training_program_actions" style="display:flex;">
-        <form action="{% url 'hrapp:training_program' training_program.id %}" method="POST">
-            {% csrf_token %}
-            {% comment %} <input type="hidden" name="actual_method" value="DELETE">
-            <button>Delete</button> {% endcomment %}
-        </form>
+        {% if start_date_program > current_date %}    
+            <form action="{% url 'hrapp:training_program' training_program.id %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="actual_method" value="DELETE">
+                <button>Delete</button>
+            </form>
+        {% else %}
+            <form>
+                {% csrf_token %}
+                <input type="hidden" name="actual_method" value="DELETE">
+                <button>Cannot Be Deleted(See Start Date)</button>
+            </form>
+        {% endif %}        
 
         <form action="{% url 'hrapp:training_program_edit_form' training_program.id %}" method="GET">
             {% csrf_token %}

@@ -1,4 +1,5 @@
 import sqlite3
+import datetime
 from django.shortcuts import render, redirect, reverse
 from hrapp.models import TrainingProgram, TrainingProgramEmployee, Employee
 from ..connection import Connection
@@ -13,7 +14,7 @@ def training_programs_list(request):
             conn.row_factory = model_factory(TrainingProgram)
             db_cursor = conn.cursor()
             db_cursor.execute("""
-               SELECT
+                SELECT
                     tp.id,
                     tp.title,
                     tp.start_date,
@@ -22,10 +23,23 @@ def training_programs_list(request):
                 FROM hrapp_trainingprogram tp
                 """)
             data = db_cursor.fetchall()
+            
+            future_tp = []
+            past_tp = []
+            
+            current_date = datetime.date.today()
+
+            for tp_Object in data:
+                if datetime.datetime.strptime(tp_Object.start_date,
+                '%Y-%m-%d').date() <= current_date:
+                    past_tp.append(tp_Object)
+                else:
+                    future_tp.append(tp_Object)    
 
         template_name = 'training_programs/training_program_list.html'
         context = {
-            'all_training_programs': data
+            'all_training_programs': future_tp,
+            'past_training_programs': past_tp
         }
         return render(request, template_name, context)
 
