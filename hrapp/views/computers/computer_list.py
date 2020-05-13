@@ -52,9 +52,7 @@ def computer_list(request):
                 form_data['manufacturer'], form_data['make'], form_data['purchase_date']
             ))
             if form_data["employee"] != "Not Assigned":
-                test_and_change_employee_computer(form_data["employee"])
-                conn.row_factory = model_factory(EmployeeComputer)
-                db_cursor = conn.cursor()
+                unassign_past_computers(form_data["employee"], db_cursor)
                 computer = get_last_computer()
                 db_cursor.execute("""
                     INSERT into hrapp_employeecomputer (computer_id, employee_id, assign_date, unassign_date)
@@ -70,6 +68,7 @@ def computer_list(request):
 
 
 def get_last_computer():
+
     with sqlite3.connect(Connection.db_path) as conn:
         conn.row_factory = model_factory(Computer)
         db_cursor = conn.cursor()
@@ -83,28 +82,38 @@ def get_last_computer():
 
         return data
     
-def test_and_change_employee_computer(id):
-    with sqlite3.connect(Connection.db_path) as conn:
-        conn.row_factory = model_factory(Computer)
-        db_cursor = conn.cursor()
-        now = datetime.datetime.now()
-        unassigned_date = now.strftime("%Y-%m-%d")
+def unassign_past_computers(id, db_cursor):
+    print("ID in test", id)
+    now = datetime.datetime.now()
+    unassigned_date = now.strftime("%Y-%m-%d")
+        
 
-        db_cursor.execute("""
-            SELECT * from hrapp_employeecomputer
-            where employee_id = ?;
-        """, (id,))
+    db_cursor.execute("""
+        SELECT id from hrapp_employeecomputer
+        where employee_id = ? and unassign_date is null;
+    """, (id,))
 
-        data = db_cursor.fetchall()
+    data = db_cursor.fetchone()
 
-        for row in data:
-            if row.unassign_date == None:
-                db_cursor = conn.cursor()
-                db_cursor.execute("""
-                UPDATE hrapp_employeecomputer
-                set unassign_date = ?
-                where id = ?
-                """,(unassigned_date, row.id))
+    ecId = data.id
+    print("date:", unassigned_date, "id:", ecId)
+    db_cursor.execute("""
+        UPDATE hrapp_employeecomputer
+        set unassign_date = ?
+        where id = ?;
+    """, (unassigned_date, ecId))
+
+
+        # for row in data:
+        #     if row.unassign_date == None:
+        #         print(unassigned_date, row.id)
+        #         db_cursor.execute("""
+        #         UPDATE hrapp_employeecomputer
+        #         set unassign_date = ?
+        #         where id = ?
+        #         """,(unassigned_date, row.id))
+
+
 
 
     
