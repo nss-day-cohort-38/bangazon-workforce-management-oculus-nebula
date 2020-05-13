@@ -1,7 +1,8 @@
 import sqlite3
+import datetime
 from django.urls import reverse
 from django.shortcuts import redirect, render
-from hrapp.models import Employee, Computer, model_factory
+from hrapp.models import Employee, Computer, model_factory, EmployeeComputer
 from ..connection import Connection
 from django import forms
 
@@ -12,6 +13,8 @@ def get_employees():
     with sqlite3.connect(Connection.db_path) as conn:
         conn.row_factory = model_factory(Employee)
         db_cursor = conn.cursor()
+        now = datetime.datetime.now()
+        today_date = now.strftime("%Y-%m-%d")
 
         db_cursor.execute('''
          select 
@@ -19,11 +22,11 @@ def get_employees():
             e.last_name,
             e.id,
             e.is_supervisor
-            from hrapp_employee e;
+            from hrapp_employee e
         ''')
 
-        return db_cursor.fetchall()
-
+        employees = db_cursor.fetchall()
+        return employees
 
 def computer_form(request):
     #this function calls the above function to grab all the employees (so it can populate a dropdown menu) and then sends the user to the right html
