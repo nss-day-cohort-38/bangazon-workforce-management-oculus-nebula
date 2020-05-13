@@ -26,6 +26,6 @@
 
     </form>
             {% else %}
-           No availible programs to assign to EMployee. Add another training program.
+           <p>No availible programs to assign to Employee. <a href="{% url 'hrapp:training_program_form' %}">Add Training Program</a>.</p>
                 {% endif %}
 {% endblock content %}
