@@ -2,7 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-size: 1.25em;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
 .main-content {
@@ -26,11 +26,29 @@ body {
   border-radius: 2px;
   margin: 0.1em;
   width: 9%;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
   cursor: pointer;
   font-style: oblique;
   font-variant: small-caps;
 }
 .program {
   margin-top: 8px;
+}
+
+.past_tp_btn {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+  color: black;
+  margin-left: 5px;
+}
+
+a:visited {
+  color: rgb(20, 20, 214);
+}
+/* .past_tp_btn a:visited {
+  color: red;
+} */
+
+#training_program_actions {
+  margin-left: 2px;
+  margin-right: 2px;
 }

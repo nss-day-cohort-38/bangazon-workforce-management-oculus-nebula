@@ -3,6 +3,7 @@
 
 
 {% block content %}
+
 <body>
 
     <section id="training-program-details">
@@ -16,32 +17,34 @@
         {% else %}
         <div>Attendees: No one currently signed up for this training program. </div>
         {% endif %}
-      </section>
+    </section>
 
-    
     <section id="training_program_actions" style="display:flex;">
-        {% if start_date_program > current_date %}    
-            <form action="{% url 'hrapp:training_program' training_program.id %}" method="POST">
-                {% csrf_token %}
-                <input type="hidden" name="actual_method" value="DELETE">
-                <button>Delete</button>
-            </form>
+        {% if start_date_program > current_date %}
+        <form action="{% url 'hrapp:training_program' training_program.id %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="actual_method" value="DELETE">
+            <button>Delete</button>
+        </form>
         {% else %}
-            <form>
-                {% csrf_token %}
-                <input type="hidden" name="actual_method" value="DELETE">
-                <button>Cannot Be Deleted(See Start Date)</button>
-            </form>
-        {% endif %}        
+        <form>
+            {% csrf_token %}
+            <input type="hidden" name="actual_method" value="DELETE">
+            <button>Cannot Be Deleted(See Start Date)</button>
+        </form>
+        {% endif %}
 
         <form action="{% url 'hrapp:training_program_edit_form' training_program.id %}" method="GET">
             {% csrf_token %}
             <button>Edit</button>
         </form>
-        </section>
 
-        {% comment %} <section class="list_of_employees"><a href="{% url 'hrapp:attendees' training_program.id %}">See List Of Employees</section>
-    </section> {% endcomment %}
+        <section class="list_of_employees">
+            <button>
+                <a href="{% url 'hrapp:attendees' training_program.id %}">See List Of Employees</a>
+            </button>
+        </section>
+    </section>
 
 </body>
 {% endblock %}
