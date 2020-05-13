@@ -1,5 +1,5 @@
 import sqlite3
-from ...connection import Connection
+from hrapp.views.connection import Connection
 import datetime
 
 

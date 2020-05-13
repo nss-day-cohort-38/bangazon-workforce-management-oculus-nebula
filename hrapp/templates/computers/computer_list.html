@@ -3,6 +3,7 @@
 {% block content %}
 <div class='header'>
 <h1>Computers</h1>
+{% if request.user.is_authenticated %}
 </div>
 <a href="{% url 'hrapp:computer_form'  %}">Add Computer</a>
 <div class="list-container">
@@ -16,6 +17,18 @@
 {% endfor %}
 </ol>
 <div class="list-container">
+{% else %}
+</div>
+<div class="list-container">
+<ol>
+{% for computer in computers %}
+    <li>
+        <p>{{ computer }}</p>
+    </li>
+{% endfor %}
+</ol>
+<div class="list-container">
+{% endif %}
 {% endblock content %}
 
 {% comment %} {% url 'hrapp:computer' computer.id %} {% endcomment %}

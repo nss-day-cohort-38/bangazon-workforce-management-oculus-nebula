@@ -7,7 +7,8 @@ from django.contrib.auth.decorators import login_required
 from hrapp.models import model_factory
 
 
-@login_required
+
+
 def training_programs_list(request):
     if request.method == 'GET':
         with sqlite3.connect(Connection.db_path) as conn:

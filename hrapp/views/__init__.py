@@ -11,4 +11,4 @@ from .training_programs.training_programs_attendees import employee_attendees
 from .computers import computer_list
 from .computers import computer_list, computer_details
 from .computers import computer_list, computer_details, computer_form, confirm_computer_delete
-from .employees import employee_list, employee_details, employee_edit, employee_add
+from .employees import employee_list, employee_details, employee_edit, employee_add, employee_add_program
