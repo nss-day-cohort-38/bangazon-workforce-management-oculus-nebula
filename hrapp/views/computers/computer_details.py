@@ -37,10 +37,10 @@ def get_computer(computer_id):
 
 @login_required
 def computer_details(request, computer_id):
-    print('comput', computer_id)
     if request.method == "GET":
         # fetch that one computer using helper function
         computer = get_computer(computer_id)
+        print("first name", computer.first_name)
 
         template = 'computers/computer_details.html'
         context = {

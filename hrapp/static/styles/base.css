@@ -17,7 +17,9 @@ body {
   padding: 1em;
   margin: 0;
 }
-
+.small-note{
+  font-size: 15px ;
+}
 .add_tp_btn {
   text-align: center;
   text-transform: capitalize;
