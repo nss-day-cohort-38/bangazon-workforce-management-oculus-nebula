@@ -1,4 +1,5 @@
 import sqlite3
+import datetime
 from django.urls import reverse
 from django.shortcuts import redirect, render
 from hrapp.models import Employee, Computer, model_factory
@@ -12,17 +13,27 @@ def get_employees():
     with sqlite3.connect(Connection.db_path) as conn:
         conn.row_factory = model_factory(Employee)
         db_cursor = conn.cursor()
+        now = datetime.datetime.now()
+        today_date = now.strftime("%Y-%m-%d")
 
         db_cursor.execute('''
          select 
             e.first_name,
             e.last_name,
             e.id,
-            e.is_supervisor
-            from hrapp_employee e;
+            e.is_supervisor,
+            ec.assign_date
+            from hrapp_employee e
+            left join hrapp_employeecomputer ec on ec.employee_id = e.id;
         ''')
 
-        return db_cursor.fetchall()
+        data = db_cursor.fetchall()
+        newData = []
+        for employee in data:
+            if employee.assign_date == "null" or employee.assign_date =="none":
+                newData.append(employee)
+        print(newData)
+        return newData
 
 
 def computer_form(request):
