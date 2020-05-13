@@ -17,3 +17,20 @@ body {
   padding: 1em;
   margin: 0;
 }
+
+.add_tp_btn {
+  text-align: center;
+  text-transform: capitalize;
+  display: inline-block;
+  font-size: 15px;
+  border-radius: 2px;
+  margin: 0.1em;
+  width: 9%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  font-style: oblique;
+  font-variant: small-caps;
+}
+.program {
+  margin-top: 8px;
+}

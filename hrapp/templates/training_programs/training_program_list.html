@@ -13,7 +13,7 @@
     <button class="closeDialog">Close</button>
 </dialog>
 
-<a href="{% url 'hrapp:training_program_form' %}">Add Training Program</a>
+<button class="add_tp_btn"><a href="{% url 'hrapp:training_program_form' %}">Add Training Program</button>
 
 <ol class="training_programs">
     {% for training_program in all_training_programs %}
