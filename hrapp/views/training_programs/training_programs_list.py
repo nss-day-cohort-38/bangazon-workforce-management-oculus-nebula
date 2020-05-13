@@ -19,8 +19,7 @@ def training_programs_list(request):
                     tp.title,
                     tp.start_date,
                     tp.end_date,
-                    tp.capacity,
-                    tp.archived
+                    tp.capacity
                 FROM hrapp_trainingprogram tp
                 """)
             data = db_cursor.fetchall()
@@ -50,9 +49,9 @@ def training_programs_list(request):
             db_cursor = conn.cursor()
             db_cursor.execute("""
             INSERT INTO hrapp_trainingprogram
-            (title, start_date, end_date, capacity, archived
+            (title, start_date, end_date, capacity
             )
-            VALUES (?, ?, ?, ?, 0)
+            VALUES (?, ?, ?, ?)
             """,
                 (form_data['title'], form_data['start_date'],
                     form_data['end_date'], form_data['capacity']))

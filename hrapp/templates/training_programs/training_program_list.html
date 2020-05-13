@@ -17,12 +17,10 @@
 
 <ol class="training_programs">
     {% for training_program in all_training_programs %}
-    {% if training_program.archived == 0 and training_program.start_date %}
     <li class="program">
         <a class="program__title" href="{% url 'hrapp:training_program' training_program.id %}">
             {{ training_program.title }}</a>
     </li>
-    {% endif %}
     {% endfor %}
 </ol>
 
