@@ -121,7 +121,7 @@ def training_program_details(request, training_program_id):
                 db_cursor = conn.cursor()
                 db_cursor.execute("""
                 UPDATE hrapp_trainingprogram
-                SET 
+                SET archived = 1
                 WHERE id = ?
                 """, (training_program_id, ))
             return redirect(reverse('hrapp:trainingprograms'))
