@@ -17,4 +17,6 @@ def current_capacity(program_id):
         GROUP BY training_program_id
         """, (program_id, ))
 
-        return db_cursor.fetchone().count 
+        data = db_cursor.fetchone()
+        
+        return data.count if hasattr(data, "count") else 0
