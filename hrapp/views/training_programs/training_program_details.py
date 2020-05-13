@@ -105,6 +105,15 @@ def training_program_details(request, training_program_id):
                 """,
                     (form_data['title'], form_data['start_date'], form_data['end_date'],
                         form_data['capacity'], training_program_id,))
+
+            with sqlite3.connect(Connection.db_path) as conn:
+                db_cursor = conn.cursor()
+                db_cursor.execute("""
+                    INSERT INTO hrapp_trainingprogramemployee
+                    (employee_id, training_program_id)
+                    VALUES (?, ?)
+                    """,
+                    (form_data['employee_id'], training_program_id,))
             return redirect(reverse('hrapp:trainingprograms'))
 
         if (

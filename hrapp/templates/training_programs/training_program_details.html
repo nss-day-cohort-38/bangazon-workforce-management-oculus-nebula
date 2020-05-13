@@ -12,7 +12,7 @@
         <div>End Date: {{ training_program.end_date }}</div>
 
         {% if training_program.employee.id is not null %}
-        <div>Number Of Attendees Currently Signed Up: {{ get_count }}</div>
+        <div>Number Of Employees Currently Assigned: {{ get_count }}</div>
         {% else %}
         <div>Attendees: No one currently signed up for this training program. </div>
         {% endif %}
@@ -22,8 +22,8 @@
     <section id="training_program_actions" style="display:flex;">
         <form action="{% url 'hrapp:training_program' training_program.id %}" method="POST">
             {% csrf_token %}
-            <input type="hidden" name="actual_method" value="DELETE">
-            <button>Delete</button>
+            {% comment %} <input type="hidden" name="actual_method" value="DELETE">
+            <button>Delete</button> {% endcomment %}
         </form>
 
         <form action="{% url 'hrapp:training_program_edit_form' training_program.id %}" method="GET">
