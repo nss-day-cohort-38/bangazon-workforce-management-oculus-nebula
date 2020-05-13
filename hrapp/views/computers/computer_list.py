@@ -40,7 +40,7 @@ def computer_list(request):
             db_cursor = conn.cursor()
             now = datetime.datetime.now()
             assigned_date = now.strftime("%Y-%m-%d")
-            computer = get_last_computer()
+            
             
 
             #get the correct information from the db
@@ -52,12 +52,15 @@ def computer_list(request):
                 form_data['manufacturer'], form_data['make'], form_data['purchase_date']
             ))
             if form_data["employee"] != "Not Assigned":
+                conn.row_factory = model_factory(EmployeeComputer)
+                db_cursor = conn.cursor()
+                computer = get_last_computer()
                 db_cursor.execute("""
                     INSERT into hrapp_employeecomputer (computer_id, employee_id, assign_date, unassign_date)
                     values(?,?,?, null)
 
                 """, (
-                    computer.id, form_data['employee'], assigned_date
+                    (computer.id+1), form_data['employee'], assigned_date
                 ))
 
             #send the user back to the master list with the updated computer
