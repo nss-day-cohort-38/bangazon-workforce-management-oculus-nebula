@@ -1,7 +1,7 @@
 import sqlite3
 import datetime
 from django.urls import reverse
-from django.shortcuts import render, redirect,get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from hrapp.models import TrainingProgram, Employee, TrainingProgramEmployee
 from hrapp.models import model_factory
@@ -131,11 +131,4 @@ def training_program_details(request, training_program_id):
 
             program_to_be_deleted.delete()
             
-            
-            # with sqlite3.connect(Connection.db_path) as conn:
-            #     db_cursor = conn.cursor()
-            #     db_cursor.execute("""
-            #     DELETE FROM hrapp_trainingprogram
-            #     WHERE id = ?
-            #     """, (training_program_id, ))
             return redirect(reverse('hrapp:trainingprograms'))
