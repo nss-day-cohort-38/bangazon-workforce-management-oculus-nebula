@@ -8,19 +8,30 @@
 {% block content %}
 <h1>Training Programs</h1>
 
-<dialog class="infoDialog">
-    <div class="infoDialog__message"></div>
-    <button class="closeDialog">Close</button>
-</dialog>
+
 {% comment %} Only authenticated users can view this part of the template {% endcomment %}
 {% if request.user.is_authenticated %}
-<button class="add_tp_btn"><a href="{% url 'hrapp:training_program_form' %}">Add Training Program</button>
+<button class="add_tp_btn"><a href="{% url 'hrapp:training_program_form' %}">Add Training Program</a></button>
 
+<h2>Upcoming Programs</h2>
 <ol class="training_programs">
     {% for training_program in all_training_programs %}
-    <li class="program">
-        <a class="program__title" href="{% url 'hrapp:training_program' training_program.id %}">
-            {{ training_program.title }}</a>
+    <li class="program">{{ training_program.title }}
+        <button class="tp_list_btn">
+            <a class="program__title" href="{% url 'hrapp:training_program' training_program.id %}">Details</a>
+        </button>
+
+    </li>
+    {% endfor %}
+</ol>
+<h2>Past Programs</h2>
+<ol class="training_programs-past">
+    {% for training_program in past_training_programs %}
+    <li class="program__title">
+      {{ training_program.title }}
+        <button class="past_tp_btn">
+          <a href="{% url 'hrapp:training_program' training_program.id %}">Details</a>
+        </button>
     </li>
     {% endfor %}
 </ol>

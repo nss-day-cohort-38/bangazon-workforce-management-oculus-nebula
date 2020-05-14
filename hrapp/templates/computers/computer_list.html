@@ -5,7 +5,7 @@
 <h1>Computers</h1>
 {% if request.user.is_authenticated %}
 </div>
-<a href="{% url 'hrapp:computer_form'  %}">Add Computer</a>
+<a class="add_computer_btn" href="{% url 'hrapp:computer_form'  %}">Add Computer</a>
 <div class="list-container">
 <div class="search-container">
 <form action="{% url 'hrapp:computers' %}" method="POST">

@@ -8,7 +8,6 @@ from hrapp.models import model_factory
 from ..connection import Connection
 
 
-
 def create_training_program(cursor, row):
     _row = sqlite3.Row(cursor, row)
 
@@ -19,7 +18,6 @@ def create_training_program(cursor, row):
     training_program.end_date = _row["end_date"]
     training_program.capacity = _row["capacity"]
 
-    # training_program.employees = []
     training_program_employee = TrainingProgramEmployee()
     training_program_employee.id = _row["id"]
     training_program_employee.employee_id = _row["employee_id"]
@@ -31,8 +29,6 @@ def create_training_program(cursor, row):
     employee.last_name = _row["last_name"]
     employee.start_date = _row["start_date"]
 
-    # return (training_program, employee,)
-    # training_program.training_program_employee = training_program
     training_program.employee = employee
     training_program.training_program_employee = training_program_employee
     return training_program
@@ -76,14 +72,13 @@ def get_count(training_program_id):
         return db_cursor.fetchone()
 
 
-
 @login_required
 def training_program_details(request, training_program_id):
     if request.method == 'GET':
         training_program = get_training_program(training_program_id)
         current_date = datetime.date.today()
         start_date_program = datetime.datetime.strptime(training_program.start_date,
-        '%Y-%m-%d').date() 
+                                                        '%Y-%m-%d').date()
         count = get_count(training_program_id)
         template = 'training_programs/training_program_details.html'
         context = {
@@ -110,8 +105,8 @@ def training_program_details(request, training_program_id):
                         capacity = ?
                     WHERE id = ?
                 """,
-                    (form_data['title'], form_data['start_date'], form_data['end_date'],
-                        form_data['capacity'], training_program_id,))
+                                  (form_data['title'], form_data['start_date'], form_data['end_date'],
+                                   form_data['capacity'], training_program_id,))
 
             with sqlite3.connect(Connection.db_path) as conn:
                 db_cursor = conn.cursor()
@@ -120,15 +115,15 @@ def training_program_details(request, training_program_id):
                     (employee_id, training_program_id)
                     VALUES (?, ?)
                     """,
-                    (form_data['employee_id'], training_program_id,))
+                                  (form_data['employee_id'], training_program_id,))
             return redirect(reverse('hrapp:trainingprograms'))
 
         if (
             "actual_method" in form_data and form_data["actual_method"] == "DELETE"
         ):
             program_to_be_deleted = get_object_or_404(TrainingProgram,
-            pk=training_program_id)
+                                                      pk=training_program_id)
 
             program_to_be_deleted.delete()
-            
+
             return redirect(reverse('hrapp:trainingprograms'))

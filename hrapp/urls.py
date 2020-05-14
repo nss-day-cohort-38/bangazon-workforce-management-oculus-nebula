@@ -7,13 +7,16 @@ app_name = 'hrapp'
 urlpatterns = [
     path('', home, name='home'),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/login/', login_user, name='login'),
+    path('admin/', admin_user, name='admin'),
     path('logout/', logout_user, name='logout'),
+
     path('employees/', employee_list, name='employee_list'),
     path('trainingprograms/', training_programs_list, name='trainingprograms'),
     path('trainingprograms/form/', training_program_form, name='training_program_form'),
     path('trainingprograms/<int:training_program_id>/form', training_program_edit_form, name='training_program_edit_form'),
     path('trainingprograms/<int:training_program_id>/details', training_program_details, name='training_program'),
-    # path('trainingprograms/<int:training_program_id>/details/attendees', employee_attendees, name='attendees'),
+    path('trainingprograms/<int:training_program_id>/details/attendees', employee_attendees, name='attendees'),
     path('employee/<int:employee_id>', employee_details, name='employee'),
     path('employee/<int:employee_id>/form', employee_edit, name='employee_edit'),
     path('employee/<int:employee_id>/programform', employee_add_program, name='employee_program_form'),
