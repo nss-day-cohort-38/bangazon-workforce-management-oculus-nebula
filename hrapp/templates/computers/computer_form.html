@@ -1,7 +1,7 @@
 {% extends 'shared/base.html'%}
 {% load static %}
 {%block content %}
-<div class="header"><h1>New Computer Form</h1></div>
+<div class="header"><h1 class="text-center">New Computer Form</h1></div>
 <div class="computer-form">
 <form action = "{% url 'hrapp:computers' %}" method="POST" class="new_form">
       {% csrf_token %}
