@@ -41,21 +41,15 @@ def computer_list(request):
             with sqlite3.connect(Connection.db_path) as conn:
                 conn.row_factory = model_factory(Computer)
                 db_cursor = conn.cursor()
+                search_query = f"%{form_data['search_results']}%"
                 db_cursor.execute("""
                     SELECT
                     * from hrapp_computer
-                    where manufacturer = ?
-                """, (form_data["search_results"],))
-                man_data = db_cursor.fetchall()
+                    where manufacturer like ?
+                    or make like ?
+                """, (search_query,search_query))
+                computers = db_cursor.fetchall()
 
-                db_cursor.execute("""
-                    SELECT
-                    * from hrapp_computer
-                    where make = ?
-                """, (form_data["search_results"],))
-                mak_data = db_cursor.fetchall()
-
-                computers = man_data + mak_data
                 template = 'computers/computer_list.html'
 
                 context = {
