@@ -11,48 +11,48 @@
     <h1>Training Program Form</h1>
 
     {% if training_program.id is not None %}
-        <form action="{% url 'hrapp:training_program' training_program.id %}" method="post"> {% csrf_token %}
+        <form class="new_form" action="{% url 'hrapp:training_program' training_program.id %}" method="post"> {% csrf_token %}
     {% else %}
-        <form action="{% url 'hrapp:trainingprograms' %}" method="post"> {% csrf_token %}
+        <form class="new_form" action="{% url 'hrapp:trainingprograms' %}" method="post"> {% csrf_token %}
     {% endif %}
 
-        <fieldset>
-            <label for="title">Title: </label>
-            <input id="title" type="text" name="title" value="{{ training_program.title }}">
+        <fieldset class="new_form">
+            <label class="new_form" for="title">Title: </label>
+            <input class="new_form" id="title" type="text" name="title" value="{{ training_program.title }}">
         </fieldset>
 
-        <fieldset>
-            <label for="start_date">Start Date: </label>
-            <input id="start_date" type="date" name="start_date" value="{{ training_program.start_date }}">
+        <fieldset class="new_form">
+            <label class="new_form" for="start_date">Start Date: </label>
+            <input class="new_form" id="start_date" type="date" name="start_date" value="{{ training_program.start_date }}">
         </fieldset>
 
-        <fieldset>
-            <label for="end_date">End Date: </label>
-            <input id="end_date" type="date" name="end_date" value="{{ training_program.end_date }}">
+        <fieldsetclass="new_form" >
+            <label class="new_form" for="end_date">End Date: </label>
+            <input class="new_form" id="end_date" type="date" name="end_date" value="{{ training_program.end_date }}">
         </fieldset>
 
-        <fieldset>
-            <label for="capacity">Capacity: </label>
-            <input id="capacity" type="text" name="capacity" value="{{ training_program.capacity }}">
+        <fieldset class="new_form" >
+            <label class="new_form" for="capacity">Capacity: </label>
+            <input class="new_form" id="capacity" type="text" name="capacity" value="{{ training_program.capacity }}">
         </fieldset>
 
         {% if training_program.id is not None %}
-            <fieldset>
-                <label for="attendee" class="attendee_list">Current Attendees</label>
-                    <ol>
+            <fieldset class="new_form">
+                <label class="new_form" for="attendee" class="attendee_list">Current Attendees</label>
+                    <ol class="new_form">
                         {% for attendee in training_program_employees %}
                             {% if attendee.training_program_id == training_program.id %}
-                                <li> {{ attendee.employee.first_name }} {{ attendee.employee.last_name }}</li>
+                                <li class="new_form"> {{ attendee.employee.first_name }} {{ attendee.employee.last_name }}</li>
                             {% endif %}
                         {% endfor %}
                      </ol>
              </fieldset>
 
-            <fieldset>
-                <label for="employee_id">Add New Employee To Program: </label>
-                    <select id="select_employee" type="text" name="employee_id">
+            <fieldset class="new_form">
+                <label for="employee_id" class="new_form">Add New Employee To Program: </label>
+                    <select id="select_employee" type="text" name="employee_id" class="new_form">
                         {% for employee in employees %}
-                            <option value="{{ employee.id }}">
+                            <option class="new_form" value="{{ employee.id }}">
                                {{ employee.first_name }} {{ employee.last_name}}</option>
                         {% endfor %}
                     </select>
@@ -61,9 +61,9 @@
 
         {% if training_program.id is not None %}
             <input type="hidden" name="actual_method" value="PUT">
-            <input type="submit" value="Update" />
+            <input class="new_form" type="submit" value="Update" />
         {% else %}
-            <input type="submit" value="Create" />
+            <input class="new_form" type="submit" value="Create" />
         {% endif %}
 
     </form>

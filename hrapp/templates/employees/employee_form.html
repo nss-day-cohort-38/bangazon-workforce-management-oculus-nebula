@@ -3,49 +3,49 @@
 {% block content %}
     <h1>Add Employee </h1>
     {% if employee.id is not None %}
-    <form action="{% url 'hrapp:employee' employee.id%}" method="POST">
+    <form action="{% url 'hrapp:employee' employee.id%}" method="POST" class="new_form">
     {% else %}
-    <form action="{% url 'hrapp:employee_list'%}" method="POST">
+    <form action="{% url 'hrapp:employee_list'%}" method="POST" class="new_form">
     {% endif %}
         {% csrf_token %}
 
         {% if employee.id is None %}
-            <fieldset>
-                <label>First Name</label>
-                <input type="text" name="first_name" value="{{employee.first_name}}"/>
+            <fieldset class="new_form">
+                <label class="new_form">First Name</label>
+                <input type="text" name="first_name" value="{{employee.first_name}}" class="new_form"/>
             </fieldset>
         {% endif %}
 
-        <fieldset>
-            <label>Last Name</label>
-            <input type="text" name="last_name" value="{{ employee.last_name }}"/>
+        <fieldset class="new_form">
+            <label class="new_form">Last Name</label>
+            <input class="new_form"type="text" name="last_name" value="{{ employee.last_name }}"/>
         </fieldset>
         
         {% if employee.id is None %}
         <input type="hidden" name="is_supervisor" value="False">
-            <fieldset>
-                <label>Start Date</label>
-                <input type="date" name="start_date" value="{{ employee.start_date }}"/>
+            <fieldset class="new_form">
+                <label class="new_form">Start Date</label>
+                <input type="date" name="start_date" value="{{ employee.start_date }}" class="new_form"/>
             </fieldset>
         {% endif %}
-        <fieldset>
-            <label >Department</label>
+        <fieldset class="new_form">
+            <label class="new_form">Department</label>
 
-            <select id="departments" name="department">
+            <select id="departments" name="department"class="new_form">
                 {% for department in departments %}
-                    <option {% if department.id == employee.department_id %}selected{% endif %} value="{{department.id}}">{{ department}}</option>
+                    <option class="new_form" {% if department.id == employee.department_id %}selected{% endif %} value="{{department.id}}">{{ department}}</option>
                 {% endfor %}
             </select>
 
         </fieldset>
         {% if employee.id is not None %}
-            <fieldset>
-                <label >Computer</label>
+            <fieldset class="new_form">
+                <label class="new_form">Computer</label>
 
-                <select id="computer" name="computer">
-                    <option value="">No Assigned Computer</option>
+                <select id="computer" name="computer" class="new_form">
+                    <option value="" class="new_form">No Assigned Computer</option>
                     {% for computer in computers %}
-                        <option {% if computer.id == computer_owned.computer.id %}selected{% endif %} value="{{computer.id}}">{{ computer}}</option>
+                        <option class="new_form"{% if computer.id == computer_owned.computer.id %}selected{% endif %} value="{{computer.id}}">{{ computer}}</option>
                     {% endfor %}
                 </select>
 
@@ -57,9 +57,9 @@
 
         {% if employee.id %}
             <input type="hidden" name="actual_method" value="PUT">
-            <input type="submit" value="Edit Employee"/>
+            <input class="new_form" type="submit" value="Edit Employee"/>
         {% else %}
-            <input type="submit" value="Add Employee"/>
+            <input class="new_form" type="submit" value="Add Employee"/>
         {% endif %}
 
     </form>
