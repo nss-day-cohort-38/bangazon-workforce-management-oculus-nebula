@@ -1,7 +1,7 @@
 {% extends 'shared/base.html' %}
 
 {% block content %}
-    <h1>Add Employee </h1>
+    <h1 class="text-center">Add Employee </h1>
     {% if employee.id is not None %}
     <form action="{% url 'hrapp:employee' employee.id%}" method="POST" class="new_form">
     {% else %}

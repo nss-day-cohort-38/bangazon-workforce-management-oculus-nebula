@@ -3,7 +3,7 @@
 
 {% block content %}
 <body>
-    <h1>Training Program Form</h1>
+    <h1  class="text-center">Training Program Form</h1>
 
     {% if training_program.id is not None %}
         <form class="new_form" action="{% url 'hrapp:training_program' training_program.id %}" method="post"> {% csrf_token %}
