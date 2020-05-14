@@ -13,18 +13,38 @@
 {% if request.user.is_authenticated %}
 <button class="add_tp_btn"><a href="{% url 'hrapp:training_program_form' %}">Add Training Program</a></button>
 
-<h2>Upcoming Programs</h2>
-<ol class="training_programs">
-    {% for training_program in all_training_programs %}
-    <li class="program">{{ training_program.title }}
-        <button class="tp_list_btn">
-            <a class="program__title" href="{% url 'hrapp:training_program' training_program.id %}">Details</a>
-        </button>
+{% if 'trainingprograms' in request.path %}
+    <h2>Upcoming Programs</h2>
+    <ol class="training_programs">
+        {% for training_program in all_training_programs %}
+        <li class="program">{{ training_program.title }}
+            <button class="tp_list_btn">
+                <a class="program__title" href="{% url 'hrapp:training_program' training_program.id %}">Details</a>
+            </button>
 
-    </li>
-    {% endfor %}
-</ol>
-<h2>Past Programs</h2>
+        </li>
+        {% endfor %}
+    </ol>
+    <button>
+        <a href="{% url 'hrapp:pasttraining' %}">View Past Programs</a>
+    </button>
+{% elif 'pasttraining' in request.path %}
+    <h2>Past Training Programs</h2>    
+    <ol class="training_programs">
+        {% for training_program in past_training_programs %}
+        <li class="program">{{ training_program.title }}
+            <button class="tp_list_btn">
+                <a class="program__title" href="{% url 'hrapp:training_program' training_program.id %}">Details</a>
+            </button>
+
+        </li>
+        {% endfor %}
+    </ol>
+    <button>
+        <a href="{% url 'hrapp:trainingprograms' %}">View Future Programs</a>
+    </button>
+{% endif %}
+{% comment %} <h2>Past Programs</h2>
 <ol class="training_programs-past">
     {% for training_program in past_training_programs %}
     <li class="program__title">
@@ -32,9 +52,7 @@
         <button class="past_tp_btn">
           <a href="{% url 'hrapp:training_program' training_program.id %}">Details</a>
         </button>
-    </li>
-    {% endfor %}
-</ol>
+    </li> {% endcomment %}
 {% comment %} This part is for users with no authentication {% endcomment %}
 {% else %}
     <ol class="training_programs">
