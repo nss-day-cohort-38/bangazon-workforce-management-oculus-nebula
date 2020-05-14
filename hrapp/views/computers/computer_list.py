@@ -27,7 +27,8 @@ def computer_list(request):
         template = 'computers/computer_list.html'
 
         context = {
-            'computers': all_computers
+            'computers': all_computers,
+            'length': len(all_computers)
         }
         return render(request, template, context)
     #check if it is  post method coming in
@@ -53,7 +54,8 @@ def computer_list(request):
                 template = 'computers/computer_list.html'
 
                 context = {
-                    'computers': computers
+                    'computers': computers,
+                    'length': len(computers)
                 }
             return render(request, template, context)
         else:
