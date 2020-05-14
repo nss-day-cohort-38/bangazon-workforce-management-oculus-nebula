@@ -44,11 +44,11 @@ body {
 
 a:link {
   text-decoration: none;
-  color: rgb(32, 11, 218)
+  color: #16a085
 }
 a:visited {
   text-decoration: none;
-  color: rgb(91, 7, 148);
+  color: #16a085
 }
 
 #training_program_actions {
