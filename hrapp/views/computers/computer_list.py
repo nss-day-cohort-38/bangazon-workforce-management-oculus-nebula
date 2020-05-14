@@ -35,36 +35,58 @@ def computer_list(request):
         #this form_data grabs the needed info from the computer_form.html page and gets ready to appropriate it to sqlite3
         form_data = request.POST
         #connect to that sweet database
-        with sqlite3.connect(Connection.db_path) as conn:
-            conn.row_factory = model_factory(Computer)
-            db_cursor = conn.cursor()
-            now = datetime.datetime.now()
-            assigned_date = now.strftime("%Y-%m-%d")
-            
-            
-
-            #get the correct information from the db
-            db_cursor.execute("""
-                INSERT into hrapp_computer (manufacturer, make, purchase_date)
-                values ( ?, ? , ?)
-            """, (
-                #fetch the information by name or by id
-                form_data['manufacturer'], form_data['make'], form_data['purchase_date']
-            ))
-            computer_id = db_cursor.lastrowid
-            if form_data["employee"] != "Not Assigned":
-                unassign_past_computers(form_data["employee"], db_cursor)
-                
+        if(
+            "actual_method" in form_data and form_data["actual_method"]=="SEARCH"
+        ):
+            with sqlite3.connect(Connection.db_path) as conn:
+                conn.row_factory = model_factory(Computer)
+                db_cursor = conn.cursor()
+                search_query = f"%{form_data['search_results']}%"
                 db_cursor.execute("""
-                    INSERT into hrapp_employeecomputer (computer_id, employee_id, assign_date, unassign_date)
-                    values(?,?,?, null)
+                    SELECT
+                    * from hrapp_computer
+                    where manufacturer like ?
+                    or make like ?
+                """, (search_query,search_query))
+                computers = db_cursor.fetchall()
 
+                template = 'computers/computer_list.html'
+
+                context = {
+                    'computers': computers
+                }
+            return render(request, template, context)
+        else:
+            with sqlite3.connect(Connection.db_path) as conn:
+                conn.row_factory = model_factory(Computer)
+                db_cursor = conn.cursor()
+                now = datetime.datetime.now()
+                assigned_date = now.strftime("%Y-%m-%d")
+                
+                
+
+                #get the correct information from the db
+                db_cursor.execute("""
+                    INSERT into hrapp_computer (manufacturer, make, purchase_date)
+                    values ( ?, ? , ?)
                 """, (
-                    (computer_id), form_data['employee'], assigned_date
+                    #fetch the information by name or by id
+                    form_data['manufacturer'], form_data['make'], form_data['purchase_date']
                 ))
+                computer_id = db_cursor.lastrowid
+                if form_data["employee"] != "Not Assigned":
+                    unassign_past_computers(form_data["employee"], db_cursor)
+                    
+                    db_cursor.execute("""
+                        INSERT into hrapp_employeecomputer (computer_id, employee_id, assign_date, unassign_date)
+                        values(?,?,?, null)
 
-            #send the user back to the master list with the updated computer
-            return redirect(reverse('hrapp:computers'))
+                    """, (
+                        (computer_id), form_data['employee'], assigned_date
+                    ))
+
+                #send the user back to the master list with the updated computer
+                return redirect(reverse('hrapp:computers'))
 
 
 
